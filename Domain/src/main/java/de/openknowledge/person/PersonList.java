@@ -1,5 +1,4 @@
-package de.openknowledge;
-
+package de.openknowledge.person;
 /*
  * Copyright (C) open knowledge GmbH.
  *
@@ -14,8 +13,26 @@ package de.openknowledge;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+ */
+
+import java.util.ArrayList;
+
+public class PersonList {
+    protected ArrayList<Person> personList;
+
+    public PersonList() {
+        personList = new ArrayList<>();
     }
+
+    public void addPerson(Person person) {
+        personList.add(person);
+    }
+    public void  removerPerson(Person person) {
+        personList.remove(person);
+    }
+    protected ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
 }
+
