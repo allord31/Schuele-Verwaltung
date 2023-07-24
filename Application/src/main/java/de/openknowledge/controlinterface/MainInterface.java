@@ -1,5 +1,4 @@
-package de.openknowledge.person;
-/*
+package de.openknowledge.controlinterface;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,30 +14,18 @@ package de.openknowledge.person;
  * limitations under the License.
  */
 
-import java.util.ArrayList;
+import de.openknowledge.printing.MyBufferedReader;
 
-public class PersonList {
-    protected ArrayList<Person> personList;
-
-    public PersonList() {
-        personList = new ArrayList<>();
-    }
-
-    public void addPerson(Person person) {
-        personList.add(person);
-    }
-    public void  removerPerson(Person person) {
-        personList.remove(person);
-    }
-    protected ArrayList<Person> getPersonList() {
-        return personList;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonList{" +
-            "personList=" + personList +
-            '}';
+public class MainInterface {
+    private final String massage = """
+        1.zeigen
+        2.Schüler, Lehrer, Klasse Services
+        3.
+        4.
+        5.
+        6.
+        """;
+    public void mainInterfaceZeigen() {
+        MyBufferedReader.print("\n"+massage);
     }
 }
-

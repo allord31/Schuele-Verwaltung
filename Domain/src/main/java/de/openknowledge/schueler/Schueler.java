@@ -41,4 +41,10 @@ public class Schueler extends Person {
     public void setSchuelerNummer(String schuelerNummer) {
         this.schuelerNummer = schuelerNummer;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", " + schuelerNummer +
+            '}';
+    }
 }

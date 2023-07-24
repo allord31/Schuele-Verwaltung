@@ -1,5 +1,4 @@
-package de.openknowledge.person;
-/*
+package de.openknowledge.klasse;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,28 +16,16 @@ package de.openknowledge.person;
 
 import java.util.ArrayList;
 
-public class PersonList {
-    protected ArrayList<Person> personList;
-
-    public PersonList() {
-        personList = new ArrayList<>();
+public class BereitendeKlassen {
+    public ArrayList<Klasse> getKlassenList() {
+    Klasse fa1b = new Klasse("FA1B", "Fachinformatiker anwendungsentwicklung", "1", "Kein");
+    Klasse fa1c = new Klasse("FA1C", "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
+    Klasse fa1d = new Klasse("Fa1D", "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
+    KlassenList klassenList = new KlassenList();
+    klassenList.addKlasse(fa1b);
+    klassenList.addKlasse(fa1c);
+    klassenList.addKlasse(fa1d);
+    return klassenList.getKlasses();
     }
 
-    public void addPerson(Person person) {
-        personList.add(person);
-    }
-    public void  removerPerson(Person person) {
-        personList.remove(person);
-    }
-    protected ArrayList<Person> getPersonList() {
-        return personList;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonList{" +
-            "personList=" + personList +
-            '}';
-    }
 }
-

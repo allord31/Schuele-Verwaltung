@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class KlassenList {
     private ArrayList<Klasse> klasses;
     public KlassenList(){
-
+        klasses = new ArrayList<>();
     }
 
     public ArrayList<Klasse> getKlasses() {
@@ -31,5 +31,12 @@ public class KlassenList {
     }
     public void removeKlasse(Klasse klasse){
         klasses.remove(klasse);
+    }
+
+    @Override
+    public String toString() {
+        return "KlassenList{" +
+            "klasses=" + klasses +
+            '}';
     }
 }
