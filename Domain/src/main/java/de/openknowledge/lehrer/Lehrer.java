@@ -15,36 +15,114 @@
  */
 package de.openknowledge.lehrer;
 
-import de.openknowledge.attribute.Adresse;
+
+import de.openknowledge.attribute.AdressenList;
+import de.openknowledge.attribute.LehrerNummer;
 import de.openknowledge.attribute.Name;
 import de.openknowledge.attribute.Telefon;
-import de.openknowledge.attribute.adresseAtribute.Geburtsdatum;
-import de.openknowledge.person.Person;
-import de.openknowledge.validieren.Validieren;
+import de.openknowledge.attribute.Geburtsdatum;
 
-public class Lehrer extends Person {
-    private String lehrerNummer;
+
+import java.util.Objects;
+
+
+public class Lehrer  {
+    private Name vorname;
+    private Name nachname;
+    private Geburtsdatum geburtsdatum;
+    private Telefon telefon;
+    private AdressenList adresse;
+    private LehrerNummer lehrerNummer;
 
     public Lehrer() {
-        super();
     }
 
-    public Lehrer(Name vorname, Name nachmame, Geburtsdatum geburtsdatum, Telefon telefon, Adresse adresse, String lehrerNummer) {
-        super(vorname, nachmame, geburtsdatum, telefon, adresse);
-        this.lehrerNummer = Validieren.eingegebeneWertValidieren("[A-Z0-9]{12}", lehrerNummer);
+    public Lehrer(Name vorname, Name nachmame, Geburtsdatum geburtsdatum, Telefon telefon, AdressenList adresse, LehrerNummer lehrerNummer) {
+        this.vorname = vorname;
+        this.nachname = nachmame;
+        this.geburtsdatum = geburtsdatum;
+        this.telefon = telefon;
+        this.adresse = adresse;
+        this.lehrerNummer = lehrerNummer;
     }
 
+    public Name getVorname() {
+        return vorname;
+    }
 
-    public String getLehrerNummer() {
+    public void setVorname(Name vorname) {
+        this.vorname = vorname;
+    }
+
+    public Name getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(Name nachname) {
+        this.nachname = nachname;
+    }
+
+    public Geburtsdatum getGeburtsdatum() {
+        return geburtsdatum;
+    }
+
+    public void setGeburtsdatum(Geburtsdatum geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
+
+    public Telefon getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(Telefon telefon) {
+        this.telefon = telefon;
+    }
+
+    public AdressenList getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(AdressenList adresse) {
+        this.adresse = adresse;
+    }
+
+    public LehrerNummer getLehrerNummer() {
         return lehrerNummer;
     }
 
-    public void setLehrerNummer(String lehrerNummer) {
-        this.lehrerNummer = Validieren.eingegebeneWertValidieren("[A-Z0-9]{12}", lehrerNummer);
+    public void setLehrerNummer(LehrerNummer lehrerNummer) {
+        this.lehrerNummer = lehrerNummer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lehrer lehrer = (Lehrer) o;
+        return Objects.equals(getVorname(), lehrer.getVorname()) && Objects.equals(getNachname(), lehrer.getNachname()) &&
+            Objects.equals(getGeburtsdatum(), lehrer.getGeburtsdatum()) &&
+            Objects.equals(getTelefon(), lehrer.getTelefon()) && Objects.equals(getAdresse(), lehrer.getAdresse()) &&
+            Objects.equals(getLehrerNummer(), lehrer.getLehrerNummer());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getVorname(), getNachname(), getGeburtsdatum(), getTelefon(), getAdresse(), getLehrerNummer());
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", " + lehrerNummer + '}';
+        return "Lehrer{" +
+            "vorname=" + vorname +
+            ", nachname=" + nachname +
+            ", geburtsdatum=" + geburtsdatum +
+            ", telefon=" + telefon +
+            ", adresse=" + adresse +
+            ", lehrerNummer=" + lehrerNummer +
+            '}';
     }
 }

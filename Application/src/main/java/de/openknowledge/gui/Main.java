@@ -15,18 +15,23 @@
  */
 package de.openknowledge.gui;
 
-import de.openknowledge.verwaltung.Zeigen;
+import de.openknowledge.controlinterface.MainInterface;
+import de.openknowledge.guiservices.KopfVonServices;
+import de.openknowledge.validieren.Auswahl;
 
 public class Main {
     public static void main(String[] args) {
-        Zeigen zeigen = new Zeigen();
-        System.out.println("\n==================================================================================\n");
-        zeigen.alleKlassenZeigen();
-        System.out.println("\n==================================================================================\n");
-        zeigen.alleLehrerZeigen();
-        System.out.println("\n==================================================================================\n");
-        zeigen.alleSchuelerZeigen();
-        System.out.println("\n==================================================================================\n");
+        MainInterface.mainInterfaceZeigen();
+        KlassenList klassenList = new KlassenList();
+        LehrerList lehrerList = new LehrerList();
+        SchuelerList schuelerList = new SchuelerList();
+        KopfVonServices kopfVonServices = new KopfVonServices(klassenList, lehrerList, schuelerList);
+        switch (Auswahl.auswahl(1,5)){
+            case 1-> kopfVonServices.zeigen();
+            case 2-> kopfVonServices.schuelerOderLehrerInEinerKLasseAddieren();
+            case 3-> kopfVonServices.SchulerOderLehrerInEinerKlasseUmsetzen();
+        }
+
 
     }
 }

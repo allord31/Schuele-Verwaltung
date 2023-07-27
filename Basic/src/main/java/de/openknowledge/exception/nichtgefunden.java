@@ -1,4 +1,4 @@
-/*
+package de.openknowledge.exception;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.openknowledge.verwaltung;
 
-public class Zeigen {
-    public void alleKlassenZeigen() {
-        KlasseService klasseService = new KlasseService();
-        System.out.println(klasseService.getKlassenList().toString());
-    }
-    public void alleSchuelerZeigen() {
-        LeherService leherService = new LeherService();
-        System.out.println(leherService.getLehrerList().toString());
-    }
-    public void alleLehrerZeigen() {
-        SchuelerService schuelerService = new SchuelerService();
-        System.out.println(schuelerService.getSchuelerList().toString());
+import de.openknowledge.printing.MyBufferedReader;
+
+public class nichtgefunden extends Exception{
+    public nichtgefunden(String suche) {
+        MyBufferedReader.print("Ihre Suche nach " + suche + " wurde nicht gefunden.");
     }
 }

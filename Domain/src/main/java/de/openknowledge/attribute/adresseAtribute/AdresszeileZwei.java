@@ -21,7 +21,7 @@ import de.openknowledge.validieren.Validieren;
 public class AdresszeileZwei {
     private final String adresszeileZwei;
     public AdresszeileZwei(String adresszeileEins) {
-        this.adresszeileZwei = Validieren.eingegebeneWertValidieren("[\\w\\W]{0,80}",adresszeileEins);
+        this.adresszeileZwei = Validieren.eingegebeneWertValidieren("[\\w\\W]{1,80}",adresszeileEins);
     }
 
     public String getAdresszeileZwei() {

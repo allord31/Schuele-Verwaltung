@@ -17,7 +17,7 @@ package de.openknowledge.person;/*
 import de.openknowledge.attribute.Adresse;
 import de.openknowledge.attribute.Name;
 import de.openknowledge.attribute.Telefon;
-import de.openknowledge.attribute.adresseAtribute.Geburtsdatum;
+import de.openknowledge.attribute.Geburtsdatum;
 
 public class Person {
     private Name vorname;

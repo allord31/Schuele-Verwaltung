@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.openknowledge.attribute.adresseAtribute;
+package de.openknowledge.attribute;
 
 import de.openknowledge.printing.MyBufferedReader;
 import de.openknowledge.validieren.Validieren;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 

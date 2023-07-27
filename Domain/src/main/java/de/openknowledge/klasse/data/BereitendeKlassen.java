@@ -1,4 +1,4 @@
-package de.openknowledge.klasse;/*
+package de.openknowledge.klasse.data;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,21 @@ package de.openknowledge.klasse;/*
  * limitations under the License.
  */
 
+import de.openknowledge.klasse.Klasse;
+
+
 import java.util.ArrayList;
 
 public class BereitendeKlassen {
+    ArrayList<Klasse> klasseArrayList = new ArrayList<>();
     public ArrayList<Klasse> getKlassenList() {
     Klasse fa1b = new Klasse("FA1B", "Fachinformatiker anwendungsentwicklung", "1", "Kein");
     Klasse fa1c = new Klasse("FA1C", "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
     Klasse fa1d = new Klasse("Fa1D", "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
-    KlassenList klassenList = new KlassenList();
-    klassenList.addKlasse(fa1b);
-    klassenList.addKlasse(fa1c);
-    klassenList.addKlasse(fa1d);
-    return klassenList.getKlasses();
+    klasseArrayList.add(fa1b);
+    klasseArrayList.add(fa1c);
+    klasseArrayList.add(fa1d);
+    return klasseArrayList;
     }
 
 }

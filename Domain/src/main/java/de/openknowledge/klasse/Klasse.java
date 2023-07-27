@@ -27,8 +27,8 @@ public class Klasse {
     private String Beschreibung;
     private String Stufe;
     private  String Klassenlehrer;
-    private ArrayList<Schueler> schuelerGruppe;
-    private ArrayList<Lehrer> lehrerGruppe;
+    private ArrayList<Schueler> schuelers = new ArrayList<>();
+    private ArrayList<Lehrer> lehrers = new ArrayList<>();
 
     public Klasse() {
     }
@@ -38,24 +38,6 @@ public class Klasse {
         Beschreibung = beschreibung;
         Stufe = stufe;
         Klassenlehrer = klassenlehrer;
-    }
-    public void addSchueler(Schueler schueler) {
-        schuelerGruppe.add(schueler);
-    }
-    public void removeSchueler(Schueler schueler) {
-        schuelerGruppe.remove(schueler);
-    }
-    public ArrayList<Schueler> getSchuelerGruppe() {
-        return schuelerGruppe;
-    }
-    public void addLehrer(Lehrer lehrer) {
-        lehrerGruppe.add(lehrer);
-    }
-    public void removeLehrer(Lehrer lehrer) {
-        lehrerGruppe.remove(lehrer);
-    }
-    public ArrayList<Lehrer> getLehrerGruppe() {
-        return lehrerGruppe;
     }
 
     public String getName() {
@@ -90,6 +72,22 @@ public class Klasse {
         Klassenlehrer = klassenlehrer;
     }
 
+    public ArrayList<Schueler> getSchuelers() {
+        return schuelers;
+    }
+
+    public void setSchuelers(ArrayList<Schueler> schuelers) {
+        this.schuelers = schuelers;
+    }
+
+    public ArrayList<Lehrer> getLehrers() {
+        return lehrers;
+    }
+
+    public void setLehrers(ArrayList<Lehrer> lehrers) {
+        this.lehrers = lehrers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -102,13 +100,12 @@ public class Klasse {
         return Objects.equals(getName(), klasse.getName()) && Objects.equals(getBeschreibung(), klasse.getBeschreibung()) &&
             Objects.equals(getStufe(), klasse.getStufe()) &&
             Objects.equals(getKlassenlehrer(), klasse.getKlassenlehrer()) &&
-            Objects.equals(getSchuelerGruppe(), klasse.getSchuelerGruppe()) &&
-            Objects.equals(getLehrerGruppe(), klasse.getLehrerGruppe());
+            Objects.equals(getSchuelers(), klasse.getSchuelers()) && Objects.equals(getLehrers(), klasse.getLehrers());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getBeschreibung(), getStufe(), getKlassenlehrer(), getSchuelerGruppe(), getLehrerGruppe());
+        return Objects.hash(getName(), getBeschreibung(), getStufe(), getKlassenlehrer(), getSchuelers(), getLehrers());
     }
 
     @Override
@@ -118,8 +115,8 @@ public class Klasse {
             ", Beschreibung='" + Beschreibung + '\'' +
             ", Stufe='" + Stufe + '\'' +
             ", Klassenlehrer='" + Klassenlehrer + '\'' +
-            ", schuelerGruppe=" + schuelerGruppe +
-            ", lehrerGruppe=" + lehrerGruppe +
+            ", schuelers=" + schuelers +
+            ", lehrers=" + lehrers +
             '}';
     }
 }

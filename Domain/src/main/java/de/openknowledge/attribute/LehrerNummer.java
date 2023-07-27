@@ -1,4 +1,4 @@
-package de.openknowledge.attribute.adresseAtribute;/*
+package de.openknowledge.attribute;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,20 @@ package de.openknowledge.attribute.adresseAtribute;/*
  * limitations under the License.
  */
 
-import de.openknowledge.validieren.Validieren;
-
 import java.util.Objects;
 
-public class AdresszeileEins {
-    private final String adresszeileEins;
-    public AdresszeileEins(String adresszeileEins) {
-        this.adresszeileEins = Validieren.eingegebeneWertValidieren("[\\w\\W]{1,80}",adresszeileEins);
+public class LehrerNummer {
+   private String lehrerNummer;
+    public LehrerNummer(String lehrerNummer){
+        this.lehrerNummer = lehrerNummer;
     }
 
-    public String getAdresszeileEins() {
-        return adresszeileEins;
+    public String getLehrerNummer() {
+        return lehrerNummer;
+    }
+
+    public void setLehrerNummer(String lehrerNummer) {
+        this.lehrerNummer = lehrerNummer;
     }
 
     @Override
@@ -36,19 +38,19 @@ public class AdresszeileEins {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AdresszeileEins that = (AdresszeileEins) o;
-        return Objects.equals(getAdresszeileEins(), that.getAdresszeileEins());
+        LehrerNummer that = (LehrerNummer) o;
+        return Objects.equals(getLehrerNummer(), that.getLehrerNummer());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAdresszeileEins());
+        return Objects.hash(getLehrerNummer());
     }
 
     @Override
     public String toString() {
-        return "AdresszeileEins{" +
-            "adresszeileEins='" + adresszeileEins + '\'' +
+        return "LehrerNummer{" +
+            "lehrerNummer='" + lehrerNummer + '\'' +
             '}';
     }
 }
