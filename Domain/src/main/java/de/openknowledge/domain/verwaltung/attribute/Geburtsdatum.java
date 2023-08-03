@@ -15,6 +15,8 @@
  */
 package de.openknowledge.domain.verwaltung.attribute;
 
+
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
@@ -25,23 +27,18 @@ import java.util.Scanner;
 
 public class Geburtsdatum {
     private final LocalDate geburtsdatum;
-    public Geburtsdatum(String dd_MM_yyyy) {
-        this.geburtsdatum = validierteGeburtsdatum(dd_MM_yyyy);
-
-    }
-
-    private LocalDate validierteGeburtsdatum(String dd_MM_yyyy) {
+    public Geburtsdatum(String dd_MM_yyyy) throws UngueltigeEingabe {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String datePattern = Validieren.eingegebeneWertValidieren("\\d{4}\\-\\d{2}\\-\\d{2}", dd_MM_yyyy);
         LocalDate localDate = LocalDate.now();
         if (LocalDate.parse(datePattern, formatter).getYear() + 5 >= localDate.getYear()) {
             MyBufferedReader.print("der schüler muss mindesten 6 Jahre alt sein.");
-            Scanner input = new Scanner(System.in);
-           return validierteGeburtsdatum(Validieren.eingegebeneWertValidieren("\\d{4}\\-\\d{2}\\-\\d{2}", input.nextLine()));
+            throw new UngueltigeEingabe(dd_MM_yyyy);
         }
         else {
-            return LocalDate.parse(datePattern, formatter);
+            this.geburtsdatum = LocalDate.parse(datePattern, formatter);
         }
+
     }
 
     public LocalDate getGeburtsdatum() {

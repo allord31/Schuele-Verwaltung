@@ -17,7 +17,7 @@ package de.openknowledge.infrastruktur.exception;/*
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 public class nichtgefunden extends Exception{
-    public nichtgefunden(String suche) {
-        MyBufferedReader.print("Ihre Suche nach " + suche + " wurde nicht gefunden.");
+    public nichtgefunden(String message) {
+        super(message);
     }
 }

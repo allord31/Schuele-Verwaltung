@@ -15,7 +15,7 @@ package de.openknowledge.infrastruktur.exception;/*
  */
 
 public class UngueltigeEingabe extends Exception{
-    public UngueltigeEingabe(String eingabe) {
-        super("Die Eingabe " + eingabe + " ist ungültig");
+    public UngueltigeEingabe(String message) {
+        super(message);
     }
 }

@@ -14,13 +14,14 @@ package de.openknowledge.domain.verwaltung.attribute;/*
  * limitations under the License.
  */
 
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
 import java.util.Objects;
 
 public class Telefon {
     private final String telefon;
-    public Telefon(String telefon) {
+    public Telefon(String telefon) throws UngueltigeEingabe {
         this.telefon  = Validieren.normierung("\\d",
             Validieren.eingegebeneWertValidieren("[\\d\\s()/-]+", telefon));
     }

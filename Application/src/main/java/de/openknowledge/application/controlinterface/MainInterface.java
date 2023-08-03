@@ -14,21 +14,25 @@ package de.openknowledge.application.controlinterface;/*
  * limitations under the License.
  */
 
+import de.openknowledge.domain.verwaltung.Verwalten;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 public  class MainInterface {
     private static final String ZEIGEN_2_SCHUELER_LEHRER_KLASSE_SERVICES_3_4_5_6 = """
         1.zeigen
-        2.Neue Schüler oder Lehrer in Klasse addieren.
-        3.Schüler, Lehrer in einer klasse umsetzen
+        2.Schüler, Lehrer in einer klasse umsetzen
+        3.Neue Schüler oder Lehrer in der Schule einfügen.
         4.
         5.
         6.
         """;
     private static final String WAS_UMSETZEN = """
         Was wollen Sie genau umsetzen ?
-        1. Schüler
-        2. Lehrer
+        1. Lehrer
+        2. Schüler
+        """;
+    private static final String WO_UMSETZEN = """
+        In welcher Klasse ?
         """;
     private static final String WAS_WOLLEN_SIE_ZEIGEN = """
         1. Alle klassen
@@ -53,6 +57,7 @@ public  class MainInterface {
     public static void wasUmsetzen() {
         MyBufferedReader.print("\n" + WAS_UMSETZEN);
     }
+    public static void woUmsetzen() {MyBufferedReader.print("\n" + WO_UMSETZEN);}
     public static void wasAddieren() {
         MyBufferedReader.print("\n" + WAS_WOLLEN_SIE_ADDIEREN);
     }

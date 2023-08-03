@@ -27,6 +27,7 @@ public class AdressenList {
     public  AdressenList (Adresse adresse) {
         adresses.add(adresse);
     }
+
     public void addNeuAdresse (Adresse neuadresse) {
         for(Adresse adresse: adresses){
             if (adresse.equals(neuadresse)) {

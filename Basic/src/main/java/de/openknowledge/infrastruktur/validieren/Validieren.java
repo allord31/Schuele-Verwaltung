@@ -29,22 +29,7 @@ public class Validieren {
      * @return Der vom Benutzer eingegebene Text, wenn er erfolgreich mit dem regulären Ausdruck übereinstimmt.
      * @throws UngueltigeEingabe Wenn der eingegebene Text nicht mit dem regulären Ausdruck übereinstimmt.
      */
-    public static String eingabeValidieren(String regex) {
-        try {
-            Scanner input = new Scanner(System.in);
-            String eingabe = input.nextLine();
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(eingabe);
-            if (matcher.matches()) {
-                return eingabe;
-            } else {
-                throw new UngueltigeEingabe(eingabe);
-            }
-        } catch(UngueltigeEingabe in) {
-            MyBufferedReader.print(in.getMessage());
-            return eingabeValidieren(regex);
-        }
-    }
+
 
     /**
      * Überprüft den Text auf Gültigkeit und gleicht ihn mit dem angegebenen regulären Ausdruck ab.
@@ -54,8 +39,7 @@ public class Validieren {
      * @return Der Text, wenn er erfolgreich mit dem regulären Ausdruck übereinstimmt.
      * @throws UngueltigeEingabe Wenn der Text nicht mit dem regulären Ausdruck übereinstimmt.
      */
-    public static String eingegebeneWertValidieren(String regex, String zeichen) {
-        try {
+    public static String eingegebeneWertValidieren(String regex, String zeichen) throws UngueltigeEingabe {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(zeichen);
             if (matcher.matches()){
@@ -63,10 +47,6 @@ public class Validieren {
             } else {
                 throw new UngueltigeEingabe(zeichen);
             }
-        } catch (UngueltigeEingabe In){
-            MyBufferedReader.print(In.getMessage());
-            return eingabeValidieren(regex);
-        }
     }
     /**
      * Wendet den regulären Ausdruck auf den gegebenen Text an und extrahiert den passenden Text daraus.

@@ -15,7 +15,7 @@ package de.openknowledge.infrastruktur.exception;/*
  */
 
 public class PersonExist extends Exception{
-    public PersonExist(String personNummer) {
-        super("Diese Person mit der Nummer "+ personNummer + "ist Exist");
+    public PersonExist(String message) {
+        super(message);
     }
 }

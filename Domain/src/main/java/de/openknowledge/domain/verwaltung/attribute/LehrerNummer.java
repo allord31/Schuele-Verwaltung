@@ -14,12 +14,15 @@ package de.openknowledge.domain.verwaltung.attribute;/*
  * limitations under the License.
  */
 
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
+import de.openknowledge.infrastruktur.validieren.Validieren;
+
 import java.util.Objects;
 
 public class LehrerNummer {
    private String lehrerNummer;
-    public LehrerNummer(String lehrerNummer){
-        this.lehrerNummer = lehrerNummer;
+    public LehrerNummer(String lehrerNummer) throws UngueltigeEingabe {
+        this.lehrerNummer = Validieren.eingegebeneWertValidieren("[A-Z\\d]{12}", lehrerNummer);;
     }
 
     public String getLehrerNummer() {

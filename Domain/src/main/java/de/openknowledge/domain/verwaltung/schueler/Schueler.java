@@ -17,7 +17,7 @@ package de.openknowledge.domain.verwaltung.schueler;
 
 import de.openknowledge.domain.verwaltung.attribute.AdressenList;
 import de.openknowledge.domain.verwaltung.attribute.Name;
-import de.openknowledge.domain.verwaltung.attribute.SchuerNummer;
+import de.openknowledge.domain.verwaltung.attribute.SchuelerNummer;
 import de.openknowledge.domain.verwaltung.attribute.Telefon;
 import de.openknowledge.domain.verwaltung.attribute.Geburtsdatum;
 
@@ -29,12 +29,12 @@ public class Schueler {
     private Geburtsdatum geburtsdatum;
     private Telefon telefon;
     private AdressenList adresse;
-    private SchuerNummer schuelerNummer;
+    private SchuelerNummer schuelerNummer;
 
     public Schueler() {
     }
 
-    public Schueler(Name vorname, Name nachmame, Geburtsdatum geburtsdatum, Telefon telefon, AdressenList adresse, SchuerNummer schuelerNummer) {
+    public Schueler(Name vorname, Name nachmame, Geburtsdatum geburtsdatum, Telefon telefon, AdressenList adresse, SchuelerNummer schuelerNummer) {
         this.vorname = vorname;
         this.nachname = nachmame;
         this.geburtsdatum = geburtsdatum;
@@ -83,11 +83,11 @@ public class Schueler {
         this.adresse = adresse;
     }
 
-    public SchuerNummer getSchuelerNummerObje() {
+    public SchuelerNummer getSchuelerNummerObje() {
         return schuelerNummer;
     }
 
-    public void setSchuelerNummer(SchuerNummer schuelerNummer) {
+    public void setSchuelerNummer(SchuelerNummer schuelerNummer) {
         this.schuelerNummer = schuelerNummer;
     }
 

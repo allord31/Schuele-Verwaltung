@@ -14,14 +14,16 @@ package de.openknowledge.domain.verwaltung.attribute.adresseAtribute;/*
  * limitations under the License.
  */
 
+
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
 import java.util.Objects;
 
 public class AdresszeileEins {
     private final String adresszeileEins;
-    public AdresszeileEins(String adresszeileEins) {
-        this.adresszeileEins = Validieren.eingegebeneWertValidieren("[\\w\\W]{1,80}",adresszeileEins);
+    public AdresszeileEins(String adresszeileEins) throws UngueltigeEingabe {
+        this.adresszeileEins = Validieren.eingegebeneWertValidieren("[\\w\\W]{1,80}", adresszeileEins);;
     }
 
     public String getAdresszeileEins() {

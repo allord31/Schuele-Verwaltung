@@ -15,6 +15,9 @@
  */
     package de.openknowledge.domain.verwaltung.attribute.adresseAtribute;
 
+
+
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
 import java.util.Objects;
@@ -22,8 +25,8 @@ import java.util.Objects;
 public class Plz {
     private final String postLeihtZahl;
 
-    public Plz(String postLeihtZahl) {
-        this.postLeihtZahl = Validieren.eingegebeneWertValidieren("\\d{5}", postLeihtZahl);
+    public Plz(String postLeihtZahl) throws UngueltigeEingabe {
+        this.postLeihtZahl = Validieren.eingegebeneWertValidieren("\\d{5}",postLeihtZahl);
     }
 
     public String getPostLeihtZahl() {

@@ -14,17 +14,18 @@ package de.openknowledge.domain.verwaltung.attribute;/*
  * limitations under the License.
  */
 
+
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
 import java.util.Objects;
 
 public class Name {
     private final String name;
-    public Name(String name) {
-        this.name = Validieren.normierungErstesMatcher("[A-Za-z\\s]{1,50}",
-            Validieren.normierung("[A-Za-z\\s]+", Validieren.eingegebeneWertValidieren("[\\w\\s]+",
-            name)).replaceAll("^\\s+|\\s+$", ""));
-
+    public Name(String name) throws UngueltigeEingabe {
+        this.name = Validieren.normierungErstesMatcher("[A-Za-z\\s\\d]{1,50}",
+            Validieren.normierung("[A-Za-z\\s\\d]+",
+                Validieren.eingegebeneWertValidieren("[\\w\\s]+",name).replaceAll("^\\s+|\\s+$", "")));
     }
 
     public String getName() {

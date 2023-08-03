@@ -15,7 +15,7 @@ package de.openknowledge.infrastruktur.exception;/*
  */
 
 public class KeineKlasse extends Exception{
-    public KeineKlasse(String klasse) {
-        super(klasse);
+    public KeineKlasse(String message) {
+        super(message);
     }
 }

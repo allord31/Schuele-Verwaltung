@@ -14,13 +14,15 @@ package de.openknowledge.domain.verwaltung.attribute;/*
  * limitations under the License.
  */
 
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
+import de.openknowledge.infrastruktur.validieren.Validieren;
+
 import java.util.Objects;
 
-public class SchuerNummer {
+public class SchuelerNummer {
     private String schulerNummer;
-    public SchuerNummer(String schulerNummer){
-        this.schulerNummer = schulerNummer;
-    }
+    public SchuelerNummer(String schulerNummer) throws UngueltigeEingabe {
+        this.schulerNummer = Validieren.eingegebeneWertValidieren("[A-Z\\d]{12}",schulerNummer);    }
 
     public String getSchulerNummer() {
         return schulerNummer;
@@ -38,7 +40,7 @@ public class SchuerNummer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SchuerNummer that = (SchuerNummer) o;
+        SchuelerNummer that = (SchuelerNummer) o;
         return Objects.equals(getSchulerNummer(), that.getSchulerNummer());
     }
 

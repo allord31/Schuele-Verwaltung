@@ -14,13 +14,15 @@ package de.openknowledge.domain.verwaltung.attribute.adresseAtribute;/*
  * limitations under the License.
  */
 
+
+import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.validieren.Validieren;
 
 import java.util.Objects;
 
 public class Stadt {
     private final String stadt;
-    public Stadt(String stadt) {
+    public Stadt(String stadt) throws UngueltigeEingabe {
         this.stadt = Validieren.eingegebeneWertValidieren("[A-Za-z\\s]{1,50}", stadt);
     }
 

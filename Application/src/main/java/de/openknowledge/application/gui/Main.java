@@ -16,20 +16,33 @@
 package de.openknowledge.application.gui;
 
 import de.openknowledge.application.controlinterface.MainInterface;
+import de.openknowledge.application.einundausgabe.Eingabe;
 import de.openknowledge.application.guiservices.KopfVonServices;
-import de.openknowledge.infrastruktur.validieren.Auswahl;
+import de.openknowledge.application.testdata.BereitendeKlassen;
+import de.openknowledge.application.testdata.BereitendeLehrer;
+import de.openknowledge.application.testdata.BereitendeSchueler;
+import de.openknowledge.application.testdata.DataBank;
+import de.openknowledge.domain.verwaltung.Verwalten;
 
 public class Main {
+
     public static void main(String[] args) {
+        //testdata
+        BereitendeKlassen bereitendeKlassen = new BereitendeKlassen();
+        BereitendeLehrer bereitendeLehrer= new BereitendeLehrer();
+        BereitendeSchueler bereitendeSchueler = new BereitendeSchueler();
+        DataBank dataBank = new DataBank(bereitendeKlassen, bereitendeLehrer, bereitendeSchueler);
+
+        //Create verwaltung
+        Verwalten verwalten = new Verwalten(dataBank.getKlassenArray(), dataBank.getLehrerArray(), dataBank.getSchuelerArray());
+
+        //create interface and controller
         MainInterface.mainInterfaceZeigen();
-        KlassenList klassenList = new KlassenList();
-        LehrerList lehrerList = new LehrerList();
-        SchuelerList schuelerList = new SchuelerList();
-        KopfVonServices kopfVonServices = new KopfVonServices(klassenList, lehrerList, schuelerList);
-        switch (Auswahl.auswahl(1,5)){
+        KopfVonServices kopfVonServices = new KopfVonServices(verwalten);
+        switch (Eingabe.auswahl(1,5)){
             case 1-> kopfVonServices.zeigen();
-            case 2-> kopfVonServices.schuelerOderLehrerInEinerKLasseAddieren();
-            case 3-> kopfVonServices.SchulerOderLehrerInEinerKlasseUmsetzen();
+            case 2-> kopfVonServices.umsetzen();
+            case 3-> kopfVonServices.neuSchuerlerOderLehrerEinfuegen();
         }
 
 

@@ -15,7 +15,7 @@ package de.openknowledge.infrastruktur.exception;/*
  */
 
 public class KeinPerson extends Exception{
-    public KeinPerson(String PersonNummer) {
-        super("Es gibt kein Schüler mit der Schüler Nummer: "+ PersonNummer);
+    public KeinPerson(String message) {
+        super(message);
     }
 }

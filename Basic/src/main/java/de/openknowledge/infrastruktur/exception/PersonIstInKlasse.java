@@ -15,7 +15,7 @@ package de.openknowledge.infrastruktur.exception;/*
  */
 
 public class PersonIstInKlasse extends Exception{
-    public PersonIstInKlasse(String personNummer){
-        super("Diese Person mit der Nummer "+ personNummer+ " ist bereit in der Klass");
+    public PersonIstInKlasse(String message){
+        super(message);
     }
 }

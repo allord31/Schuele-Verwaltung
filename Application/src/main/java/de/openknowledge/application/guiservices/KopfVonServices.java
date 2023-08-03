@@ -1,4 +1,5 @@
-package de.openknowledge.application.guiservices;/*
+package de.openknowledge.application.guiservices;
+/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,58 +16,52 @@ package de.openknowledge.application.guiservices;/*
  */
 
 import de.openknowledge.application.controlinterface.MainInterface;
-import de.openknowledge.infrastruktur.printing.MyBufferedReader;
-import de.openknowledge.infrastruktur.validieren.Auswahl;
-
-import java.util.Scanner;
+import de.openknowledge.application.einundausgabe.Eingabe;
+import de.openknowledge.application.sekretearin.KlassenController;
+import de.openknowledge.application.sekretearin.LehrerController;
+import de.openknowledge.application.sekretearin.SchuelerController;
+import de.openknowledge.domain.verwaltung.Verwalten;
+import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 
 public class KopfVonServices {
-    private KlassenList klassenList;
-    private LehrerList lehrerList;
-    private SchuelerList schuelerList;
-    private KlasseService klasseService = new KlasseService();
-    private Scanner input = new Scanner(System.in);
-    public KopfVonServices(KlassenList klassenList, LehrerList lehrerList, SchuelerList schuelerList) {
-        this.klassenList = klassenList;
-        this.lehrerList = lehrerList;
-        this.schuelerList = schuelerList;
+    Verwalten verwalten;
+    KlassenController klassenController;
+    LehrerController lehrerController;
+    SchuelerController schuelerController;
+
+    public KopfVonServices(Verwalten verwalten) {
+        this.verwalten = verwalten;
+        klassenController = new KlassenController(verwalten);
+        lehrerController = new LehrerController(verwalten);
+        schuelerController = new SchuelerController(verwalten);
     }
+
     public void zeigen() {
         MainInterface.wasWollenSieZeigen();
-        Zeigen wasWollenZeigen = new Zeigen();
-        switch (Auswahl.auswahl(1,6)) {
-            case 1-> wasWollenZeigen.alleKlassenZeigen(klassenList);
-            case 2-> wasWollenZeigen.alleLehrerZeigen(lehrerList);
-            case 3-> wasWollenZeigen.alleSchuelerZeigen(schuelerList);
-            case 4-> {
-                MyBufferedReader.print("Geben Sie Die Klassen Name ein: ");
-                String klassenName = input.nextLine();
-                wasWollenZeigen.bestimmteKlasseZeigen(klassenName, klassenList);
-            }
-            case 5-> {
-                MyBufferedReader.print("Geben Sie Die Lehrer Nummer ein");
-                String lehrerNummer = input.nextLine();
-                wasWollenZeigen.bestimmteLehrerZeigen(lehrerNummer, lehrerList);
-            }
-            case 6-> {
-                MyBufferedReader.print("Geben Sie Die Schüler Nummer ein");
-                String schuelerNummer = input.nextLine();
-                wasWollenZeigen.bestimmteSchulerZeigen(schuelerNummer,schuelerList);
-            }
+        verwalten.getLehrerList().add(new Lehrer());
+        switch (Eingabe.auswahl(1,6)) {
+            case 1-> klassenController.klassenZeigen();
+            case 2-> lehrerController.lehrerZeigen();
+            case 3-> schuelerController.schuelerZeigen();
+            case 4-> klassenController.bestimmteKlasseZeigen(Eingabe.klassenName());
+            case 5-> lehrerController.bestimmteLehrerZeigen(Eingabe.lehrerNummer());
+            case 6-> schuelerController.bestimmteSchuelerZeigen(Eingabe.schuelerNummer());
         }
     }
-    public void SchulerOderLehrerInEinerKlasseUmsetzen() {
+    public void umsetzen() {
         MainInterface.wasUmsetzen();
-        switch (Auswahl.auswahl(1,2)){
-            case 1->klasseService.schuelerUmsetzen(klassenList, schuelerList);
-            case 2->klasseService.lehrerUmsetzen(klassenList, lehrerList);
+        switch (Eingabe.auswahl(1,2)) {
+            case 1-> lehrerController.lehrerUmsetzen();
+            case 2-> schuelerController.schuelerUmsetzen();
         }
     }
-    public void schuelerOderLehrerInEinerKLasseAddieren() {
+
+    public void neuSchuerlerOderLehrerEinfuegen() {
         MainInterface.wasAddieren();
-        switch (Auswahl.auswahl(1,2)){
-           case 1-> klasseService.addNeuLehrerInBestimmteKlasse(klassenList, lehrerList);
-           case 2-> klasseService.addNeuSchuelerInBestimmteKlasse(klassenList,schuelerList);
+        switch (Eingabe.auswahl(1,2)){
+            case 1-> lehrerController.lehrerAddieren();
+            case 2-> schuelerController.schuelerAddieren();
         }
+
     }
 }

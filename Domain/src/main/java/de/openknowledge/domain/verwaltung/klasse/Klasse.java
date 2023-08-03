@@ -16,14 +16,17 @@
 
 package de.openknowledge.domain.verwaltung.klasse;
 
+import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.schueler.Schueler;
 import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Klasse {
-    private String name;
+    private Name name;
     private String Beschreibung;
     private String Stufe;
     private  String Klassenlehrer;
@@ -33,18 +36,18 @@ public class Klasse {
     public Klasse() {
     }
 
-    public Klasse(String name, String beschreibung, String stufe, String klassenlehrer) {
+    public Klasse(Name name, String beschreibung, String stufe, String klassenlehrer) {
         this.name = name;
         Beschreibung = beschreibung;
         Stufe = stufe;
         Klassenlehrer = klassenlehrer;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
@@ -75,17 +78,26 @@ public class Klasse {
     public ArrayList<Schueler> getSchuelers() {
         return schuelers;
     }
-
-    public void setSchuelers(ArrayList<Schueler> schuelers) {
-        this.schuelers = schuelers;
+    public void addSchueler(Schueler schueler) {
+        this.schuelers.add(schueler);
     }
 
-    public ArrayList<Lehrer> getLehrers() {
-        return lehrers;
+    public void setSchuelers(ArrayList<Schueler> schuelers) {
+        this.schuelers.addAll(schuelers);
+    }
+
+    public List<Lehrer> getLehrers() {
+        return Collections.unmodifiableList(lehrers);
+    }
+    public void addLehrer(Lehrer lehrer) {
+        this.lehrers.add(lehrer);
+    }
+    public void removeLehrer(Lehrer lehrer) {
+        this.lehrers.remove(lehrer);
     }
 
     public void setLehrers(ArrayList<Lehrer> lehrers) {
-        this.lehrers = lehrers;
+        this.lehrers.addAll(lehrers);
     }
 
     @Override
