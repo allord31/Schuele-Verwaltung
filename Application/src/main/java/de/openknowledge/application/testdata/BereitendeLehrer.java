@@ -38,7 +38,7 @@ public class BereitendeLehrer {
     public BereitendeLehrer() {
         try {
             Lehrer lehrerOne = new Lehrer(new Name("Brejet"), new Name("Bruns"),
-                new Geburtsdatum("1991-06-01"), new Telefon("049176251 2253"),
+                new Geburtsdatum("1950-05-03"), new Telefon("049176251 2253"),
                 new AdressenList(new Adresse(new AdresszeileEins("Bahnhof Sud. 12"), new AdresszeileZwei(""),
                     new Stadt("Oldenburg"), new Plz("26125"))), new LehrerNummer("123412341234"));
 

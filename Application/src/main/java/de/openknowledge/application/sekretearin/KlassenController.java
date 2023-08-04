@@ -15,9 +15,13 @@ package de.openknowledge.application.sekretearin;/*
  */
 
 import de.openknowledge.application.einundausgabe.Ausgabe;
+import de.openknowledge.application.einundausgabe.Eingabe;
 import de.openknowledge.domain.verwaltung.Verwalten;
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.klasse.Klasse;
+import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
+import de.openknowledge.domain.verwaltung.schueler.Schueler;
+import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 import java.util.ArrayList;
@@ -40,6 +44,35 @@ public class KlassenController {
             }
         }
         Ausgabe.klasseNichtGefunden(klassenName);
+    }
+
+    public void schuelerInDerKlasseZeigen() {
+        Name klassenname = Eingabe.klassenName();
+        try {
+            schuelerEinzelZeigen(verwalten.getKlasse(klassenname));
+        } catch (KeineKlasse e) {
+            Ausgabe.klasseNichtGefunden(klassenname);
+        }
+    }
+    private static void schuelerEinzelZeigen(Klasse klasse) {
+        for (Schueler schueler: klasse.getSchuelers()) {
+            MyBufferedReader.print(Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(), schueler.getVorname()
+                , schueler.getNachname(), schueler.getGeburtsdatum().toString(), schueler.getAdresse().getAdresses(), schueler.getTelefon()));
+        }
+    }
+    public  void lehrerInderKlasseZeigen() {
+        Name klassenname = Eingabe.klassenName();
+        try {
+            lehrerEinzelZeigen(verwalten.getKlasse(klassenname));
+        } catch (KeineKlasse e) {
+            Ausgabe.klasseNichtGefunden(klassenname);
+        }
+    }
+    private static void lehrerEinzelZeigen(Klasse klasse) {
+        for (Lehrer lehrer: klasse.getLehrers()) {
+            MyBufferedReader.print(Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()
+                , lehrer.getNachname(), lehrer.getGeburtsdatum().toString(), lehrer.getAdresse().getAdresses(), lehrer.getTelefon()));
+        }
     }
 
 

@@ -17,10 +17,18 @@ package de.openknowledge.application.sekretearin;/*
 import de.openknowledge.application.einundausgabe.Ausgabe;
 import de.openknowledge.application.einundausgabe.Eingabe;
 import de.openknowledge.domain.verwaltung.Verwalten;
-import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
+import de.openknowledge.domain.verwaltung.attribute.Adresse;
+import de.openknowledge.domain.verwaltung.attribute.AdressenList;
+import de.openknowledge.domain.verwaltung.attribute.Geburtsdatum;
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.attribute.SchuelerNummer;
+import de.openknowledge.domain.verwaltung.attribute.Telefon;
+import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.AdresszeileEins;
+import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.AdresszeileZwei;
+import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Plz;
+import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Stadt;
 import de.openknowledge.domain.verwaltung.schueler.Schueler;
+import de.openknowledge.infrastruktur.exception.IstPersonInKlasse;
 import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
@@ -41,8 +49,8 @@ public class SchuelerController {
     public void bestimmteSchuelerZeigen(SchuelerNummer schuelerNummer) {
         for (Schueler schueler :verwalten.getSchuelerList()) {
             if (schueler.getSchuelerNummerObje().equals(schuelerNummer)) {
-                Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(), schueler.getVorname()
-                    , schueler.getNachname(), schueler.getGeburtsdatum().toString(), schueler.getAdresse().getAdresses(), schueler.getTelefon());
+                MyBufferedReader.print(Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(), schueler.getVorname()
+                    , schueler.getNachname(), schueler.getGeburtsdatum().toString(), schueler.getAdresse().getAdresses(), schueler.getTelefon()));
                 return;
             }
         }
@@ -58,20 +66,40 @@ public class SchuelerController {
             Ausgabe.schuelerNichtGefunden(schuelerNummer);
         } catch (KeineKlasse e) {
             Ausgabe.klasseNichtGefunden(klassenName);
-        } catch (PersonExist e) {
+        } catch (IstPersonInKlasse e) {
             Ausgabe.schuelerIstInDieseKlasse(klassenName,  schuelerNummer);
         }
     }
 
     public void schuelerAddieren() {
-        Name klassenName = Eingabe.klassenName();
-        SchuelerNummer schuelerNummer= Eingabe.schuelerNummer();
+        Schueler neuSchueler = schuelerErstellen();
         try {
-            verwalten.addSchuelerInKlasse(klassenName, schuelerNummer);
-        } catch (KeineKlasse e) {
-            Ausgabe.klasseNichtGefunden(klassenName);
+            verwalten.addNeuSchueler(neuSchueler);
+        } catch (PersonExist e) {
+            Ausgabe.schuelerIstInDerSchuele(neuSchueler);
+        }
+    }
+
+    private static Schueler schuelerErstellen() {
+        SchuelerNummer schuelerNummer= Eingabe.schuelerNummer();
+        Name vorname = Eingabe.vorname();
+        Name nachname = Eingabe.nachname();
+        Geburtsdatum geburtsdatum = Eingabe.geburtsdatum();
+        Telefon telefon = Eingabe.telefon();
+        AdresszeileEins adresszeileEins = Eingabe.adresszeileEins();
+        AdresszeileZwei adresszeileZwei = Eingabe.adresszeileZwei();
+        Plz plz = Eingabe.plz();
+        Stadt stadt = Eingabe.stadt();
+        Adresse adresse = new Adresse(adresszeileEins, adresszeileZwei, stadt, plz);
+        AdressenList adressenList = new AdressenList(adresse);
+        return new Schueler(vorname, nachname, geburtsdatum, telefon, adressenList, schuelerNummer);
+    }
+    public void schuelerEntfernen() {
+        SchuelerNummer schuelerNummer = Eingabe.schuelerNummer();
+        try {
+            verwalten.removeSchueler(schuelerNummer);
         } catch (KeinPerson e) {
-            Ausgabe.schuelerNichtGefunden(schuelerNummer);
+            Ausgabe.schuelerEntfernen(schuelerNummer);
         }
     }
 }

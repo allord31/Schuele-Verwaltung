@@ -18,11 +18,18 @@ import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.attribute.SchuelerNummer;
 import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
+import de.openknowledge.domain.verwaltung.schueler.Schueler;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 public class Ausgabe {
     public static void klasseNichtGefunden(Name klassenName) {
         MyBufferedReader.print("Dies Klasse "+ klassenName.getName()+ " ist nicht exist.");
+    }
+    public static String klasseDetails() {
+        return """
+                Klasse Name: %s
+                Klasse beschreibung: %s
+                klasse Stufe: %s""";
     }
     public static void lehrerNichtGefunden(LehrerNummer lehrerNummer) {
         MyBufferedReader.print("Diese Lehrer mit der Nummer "+ lehrerNummer.getLehrerNummer() +" ist nicht exist.");
@@ -34,33 +41,41 @@ public class Ausgabe {
         MyBufferedReader.print("Diese Lehrer " + lehrer.getVorname() + " " + lehrer.getNachname()
             +" ist schon bereit eingefügt worden.");
     }
+    public static void lehrerEntfernen(LehrerNummer lehrerNummer) {
+        MyBufferedReader.print("Diese Lehrer mit der Nummer: " + lehrerNummer.getLehrerNummer() + " ist nicht in der Schule, um zu entfernen.");
+    }
+    public static String lehrerDetails() {
+        return """
+                
+                Lehrer Nummer: %s, Lehrer Vorname: %s, Lehrer Nachname: %s, Geburtsdatum: %s
+                Adresse: %s
+                Telefon Nummer: %s""";
+    }
     public static void schuelerNichtGefunden(SchuelerNummer schuelerNummer) {
         MyBufferedReader.print("Diese Schüler mit der Nummer "+ schuelerNummer.getSchulerNummer() +" ist nicht exist.");
     }
     public static void schuelerIstInDieseKlasse(Name klassenname, SchuelerNummer schuelerNummer) {
-        MyBufferedReader.print("Diese Lehrer mit der Nummer "+ schuelerNummer.getSchulerNummer() +" ist in diese Klasse " +klassenname.getName()+" bereit exist.");
+        MyBufferedReader.print("Diese Schüler mit der Nummer "+ schuelerNummer.getSchulerNummer() +" ist in diese Klasse " +klassenname.getName()+" bereit exist.");
+    }
+    public static void schuelerIstInDerSchuele(Schueler schueler) {
+        MyBufferedReader.print("Diese Schüler " + schueler.getVorname() + " " + schueler.getNachname()
+            +" ist schon bereit eingefügt worden.");
+    }
+    public static void schuelerEntfernen(SchuelerNummer schuelerNummer) {
+        MyBufferedReader.print("Diese Schüler mit der Nummer: " + schuelerNummer.getSchulerNummer() + " ist nicht in der Schule, um zu entfernen.");
     }
 
+    public static String schuelerDetails() {
+        return """
+                
+                Schüler Nummer: %s, Schüler Vorname: %s, Schüler Nachname: %s, Geburtsdatum: %s
+                Adresse: %s
+                Telefon Nummer: %s
+                """;
+    }
     public static void neuVersuch() {
         MyBufferedReader.print("Wollen Sie erneut versuchen. 1. Ja oder 2. Nein ");
     }
-    public static String klasseDetails() {
-        return """
-                Klasse Name: %s
-                Klasse beschreibung: %s
-                klasse Stufe: %s""";
-    }
-    public static String lehrerDetails() {
-        return """
-                Lehrer Nummer: %s, Lehrer Vorname: %s, Lehrer Nachname: %s, Geburtsdatum: %s\n
-                Adresse: %s\n
-                Telefon Nummer: %s""";
-    }
-    public static String schuelerDetails() {
-        return """
-                Schüler Nummer: %s, Schüler Vorname: %s, Schüler Nachname: %s, Geburtsdatum: %s\n
-                Adresse: %s\n
-                Telefon Nummer: %s""";
-    }
-//    public static String
+
+
 }

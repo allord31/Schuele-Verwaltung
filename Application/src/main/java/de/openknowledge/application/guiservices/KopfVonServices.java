@@ -21,7 +21,6 @@ import de.openknowledge.application.sekretearin.KlassenController;
 import de.openknowledge.application.sekretearin.LehrerController;
 import de.openknowledge.application.sekretearin.SchuelerController;
 import de.openknowledge.domain.verwaltung.Verwalten;
-import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 
 public class KopfVonServices {
     Verwalten verwalten;
@@ -38,30 +37,39 @@ public class KopfVonServices {
 
     public void zeigen() {
         MainInterface.wasWollenSieZeigen();
-        verwalten.getLehrerList().add(new Lehrer());
-        switch (Eingabe.auswahl(1,6)) {
-            case 1-> klassenController.klassenZeigen();
-            case 2-> lehrerController.lehrerZeigen();
-            case 3-> schuelerController.schuelerZeigen();
-            case 4-> klassenController.bestimmteKlasseZeigen(Eingabe.klassenName());
-            case 5-> lehrerController.bestimmteLehrerZeigen(Eingabe.lehrerNummer());
-            case 6-> schuelerController.bestimmteSchuelerZeigen(Eingabe.schuelerNummer());
+        switch (Eingabe.auswahl(1, 8)) {
+            case 1 -> klassenController.klassenZeigen();
+            case 2 -> lehrerController.lehrerZeigen();
+            case 3 -> schuelerController.schuelerZeigen();
+            case 4 -> klassenController.bestimmteKlasseZeigen(Eingabe.klassenName());
+            case 5 -> lehrerController.bestimmteLehrerZeigen(Eingabe.lehrerNummer());
+            case 6 -> schuelerController.bestimmteSchuelerZeigen(Eingabe.schuelerNummer());
+            case 7 -> klassenController.lehrerInderKlasseZeigen();
+            case 8 -> klassenController.schuelerInDerKlasseZeigen();
         }
     }
+
     public void umsetzen() {
         MainInterface.wasUmsetzen();
-        switch (Eingabe.auswahl(1,2)) {
-            case 1-> lehrerController.lehrerUmsetzen();
-            case 2-> schuelerController.schuelerUmsetzen();
+        switch (Eingabe.auswahl(1, 2)) {
+            case 1 -> lehrerController.lehrerUmsetzen();
+            case 2 -> schuelerController.schuelerUmsetzen();
         }
     }
 
     public void neuSchuerlerOderLehrerEinfuegen() {
         MainInterface.wasAddieren();
-        switch (Eingabe.auswahl(1,2)){
-            case 1-> lehrerController.lehrerAddieren();
-            case 2-> schuelerController.schuelerAddieren();
+        switch (Eingabe.auswahl(1, 2)) {
+            case 1 -> lehrerController.lehrerAddieren();
+            case 2 -> schuelerController.schuelerAddieren();
         }
+    }
 
+    public void entfernenLehrerOderSchuelerVonSchule() {
+        MainInterface.wasEntfernen();
+        switch (Eingabe.auswahl(1, 2)) {
+            case 1 -> lehrerController.lehrerEntfernen();
+            case 2 -> schuelerController.schuelerEntfernen();
+        }
     }
 }

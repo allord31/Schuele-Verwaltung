@@ -138,7 +138,8 @@ public class Eingabe {
         try {
             return new LehrerNummer(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "\n Lehrernummer ist genau 12 Zeichen lang und besteht aus Großbuchstaben und Ziffern");
+            MyBufferedReader.print(eingabe.getMessage() + "\n Telefonnummern unterstützen nur neben Ziffern nur die" +
+                ", Eingabe folgender Zeichen: runde Klammern, Schrägstrich, Bindestrich, Leerzeichen");
             return lehrerNummer();
         }
     }

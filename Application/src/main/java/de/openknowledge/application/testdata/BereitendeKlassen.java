@@ -15,6 +15,7 @@ package de.openknowledge.application.testdata;/*
  */
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.klasse.Klasse;
+import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 import de.openknowledge.infrastruktur.exception.UngueltigeEingabe;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
@@ -26,7 +27,7 @@ public class BereitendeKlassen {
     public BereitendeKlassen(){
 
         try {
-            Klasse fa1b = new Klasse(new Name("FA1B"), "Fachinformatiker anwendungsentwicklung", "1", "Kein");
+            Klasse fa1b = new Klasse(new Name("FA1B"), "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
             Klasse fa1c = new Klasse(new Name("FA1C"), "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
             Klasse fa1d = new Klasse(new Name("FA1D"), "Fachinformatiker Anwendungsentwicklung", "1", "Kein");
             klasseArrayList.add(fa1b);
@@ -36,6 +37,7 @@ public class BereitendeKlassen {
             MyBufferedReader.print(eingabe.getMessage());
         }
     }
+
     public ArrayList<Klasse> getKlassenList() {
     return klasseArrayList;
     }

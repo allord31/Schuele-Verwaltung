@@ -1,4 +1,5 @@
-package de.openknowledge.application.sekretearin;/*
+package de.openknowledge.application.sekretearin;
+/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,11 +32,8 @@ import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
-import de.openknowledge.infrastruktur.exception.PersonIstInKlasse;
+import de.openknowledge.infrastruktur.exception.IstPersonInKlasse;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
-
-import java.util.ArrayList;
-
 public class LehrerController {
 
     private final Verwalten verwalten;
@@ -51,8 +49,8 @@ public class LehrerController {
     public void bestimmteLehrerZeigen(LehrerNummer lehrerNummer) {
         for (Lehrer lehrer : verwalten.getLehrerList()) {
             if (lehrer.getLehrerNummerObje().equals(lehrerNummer)) {
-                Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()
-                    , lehrer.getNachname(), lehrer.getGeburtsdatum().toString(), lehrer.getAdresse().getAdresses(), lehrer.getTelefon());
+                MyBufferedReader.print(Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()
+                    , lehrer.getNachname(), lehrer.getGeburtsdatum().toString(), lehrer.getAdresse().getAdresses(), lehrer.getTelefon()));
                 return;
             }
         }
@@ -67,12 +65,20 @@ public class LehrerController {
         Ausgabe.lehrerNichtGefunden(lehrerNummer);
     } catch (KeineKlasse e) {
         Ausgabe.klasseNichtGefunden(klassenName);
-    } catch (PersonIstInKlasse e) {
+    } catch (IstPersonInKlasse e) {
         Ausgabe.lehrerIstInDieseKlasse(klassenName, lehrerNummer);
     }
     }
-
     public void lehrerAddieren() {
+        Lehrer neuLehrer = lehrerErstellen();
+        try {
+            verwalten.addNeuLehrer(neuLehrer);
+        } catch (PersonExist e) {
+            Ausgabe.lehrerIstInDerSchuele(neuLehrer);
+        }
+    }
+
+    private static Lehrer lehrerErstellen() {
         LehrerNummer lehrerNummer= Eingabe.lehrerNummer();
         Name vorname = Eingabe.vorname();
         Name nachname = Eingabe.nachname();
@@ -85,11 +91,15 @@ public class LehrerController {
         Adresse adresse = new Adresse(adresszeileEins, adresszeileZwei, stadt, plz);
         AdressenList adressenList = new AdressenList(adresse);
         Lehrer neuLehrer = new Lehrer(vorname, nachname, geburtsdatum, telefon, adressenList, lehrerNummer);
-        try {
-            verwalten.addNeuLehrer(neuLehrer);
-        } catch (PersonExist e) {
-            Ausgabe.lehrerIstInDerSchuele(neuLehrer);
-        }
+        return neuLehrer;
+    }
 
+    public void lehrerEntfernen() {
+        LehrerNummer lehrerNummer = Eingabe.lehrerNummer();
+        try {
+            verwalten.removeLehrer(lehrerNummer);
+        } catch (KeinPerson keinPerson) {
+            Ausgabe.lehrerEntfernen(lehrerNummer);
+        }
     }
 }

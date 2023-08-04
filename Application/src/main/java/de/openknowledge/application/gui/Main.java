@@ -22,27 +22,29 @@ import de.openknowledge.application.testdata.BereitendeKlassen;
 import de.openknowledge.application.testdata.BereitendeLehrer;
 import de.openknowledge.application.testdata.BereitendeSchueler;
 import de.openknowledge.application.testdata.DataBank;
+import de.openknowledge.application.testdata.SchuelerOderLehrerVerteilen;
 import de.openknowledge.domain.verwaltung.Verwalten;
+
 
 public class Main {
 
     public static void main(String[] args) {
         //testdata
-        BereitendeKlassen bereitendeKlassen = new BereitendeKlassen();
-        BereitendeLehrer bereitendeLehrer= new BereitendeLehrer();
-        BereitendeSchueler bereitendeSchueler = new BereitendeSchueler();
-        DataBank dataBank = new DataBank(bereitendeKlassen, bereitendeLehrer, bereitendeSchueler);
-
+        DataBank dataBank = new DataBank();
         //Create verwaltung
         Verwalten verwalten = new Verwalten(dataBank.getKlassenArray(), dataBank.getLehrerArray(), dataBank.getSchuelerArray());
 
         //create interface and controller
-        MainInterface.mainInterfaceZeigen();
-        KopfVonServices kopfVonServices = new KopfVonServices(verwalten);
-        switch (Eingabe.auswahl(1,5)){
-            case 1-> kopfVonServices.zeigen();
-            case 2-> kopfVonServices.umsetzen();
-            case 3-> kopfVonServices.neuSchuerlerOderLehrerEinfuegen();
+        while (true) {
+            MainInterface.mainInterfaceZeigen();
+            KopfVonServices kopfVonServices = new KopfVonServices(verwalten);
+            switch (Eingabe.auswahl(1, 6)) {
+                case 1 -> kopfVonServices.zeigen();
+                case 2 -> kopfVonServices.umsetzen();
+                case 3 -> kopfVonServices.neuSchuerlerOderLehrerEinfuegen();
+                case 4 -> kopfVonServices.entfernenLehrerOderSchuelerVonSchule();
+                case 6 -> System.exit(0);
+            }
         }
 
 

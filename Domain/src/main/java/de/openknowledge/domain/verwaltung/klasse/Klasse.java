@@ -82,6 +82,10 @@ public class Klasse {
         this.schuelers.add(schueler);
     }
 
+    public void removeSchueler(Schueler schueler) {
+        this.schuelers.remove(schueler);
+    }
+
     public void setSchuelers(ArrayList<Schueler> schuelers) {
         this.schuelers.addAll(schuelers);
     }
