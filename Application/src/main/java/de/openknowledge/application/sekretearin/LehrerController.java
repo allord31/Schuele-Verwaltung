@@ -37,15 +37,28 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 public class LehrerController {
 
     private final Verwalten verwalten;
+    /**
+     * Konstruktor für den LehrerController.
+     *
+     * @param verwalten Das Verwaltungsobjekt, mit dem der Controller arbeitet.
+     */
     public LehrerController(Verwalten verwalten) {
         this.verwalten = verwalten;
     }
+    /**
+     * Zeigt Details aller Lehrer an.
+     */
     public void lehrerZeigen() {
         for (Lehrer lehrer : verwalten.getLehrerList()) {
             MyBufferedReader.print(Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()
                 , lehrer.getNachname(), lehrer.getGeburtsdatum().toString(), lehrer.getAdresse().getAdresses(), lehrer.getTelefon()));
         }
     }
+    /**
+     * Zeigt die Details eines bestimmten Lehrers an.
+     *
+     * @param lehrerNummer Die Nummer des gesuchten Lehrers.
+     */
     public void bestimmteLehrerZeigen(LehrerNummer lehrerNummer) {
         for (Lehrer lehrer : verwalten.getLehrerList()) {
             if (lehrer.getLehrerNummerObje().equals(lehrerNummer)) {
@@ -56,6 +69,9 @@ public class LehrerController {
         }
         Ausgabe.lehrerNichtGefunden(lehrerNummer);
     }
+    /**
+     * Versetzt einen Lehrer in eine andere Klasse.
+     */
     public void lehrerUmsetzen() {
         LehrerNummer lehrerNummer = Eingabe.lehrerNummer();
         Name klassenName = Eingabe.klassenName();
@@ -69,6 +85,9 @@ public class LehrerController {
         Ausgabe.lehrerIstInDieseKlasse(klassenName, lehrerNummer);
     }
     }
+    /**
+     * Fügt einen neuen Lehrer hinzu.
+     */
     public void lehrerAddieren() {
         Lehrer neuLehrer = lehrerErstellen();
         try {
@@ -77,7 +96,11 @@ public class LehrerController {
             Ausgabe.lehrerIstInDerSchuele(neuLehrer);
         }
     }
-
+    /**
+     * Erstellt ein Lehrer-Objekt mit den angegebenen Attributen.
+     *
+     * @return Ein neu erstelltes Lehrer-Objekt.
+     */
     private static Lehrer lehrerErstellen() {
         LehrerNummer lehrerNummer= Eingabe.lehrerNummer();
         Name vorname = Eingabe.vorname();
@@ -93,7 +116,9 @@ public class LehrerController {
         Lehrer neuLehrer = new Lehrer(vorname, nachname, geburtsdatum, telefon, adressenList, lehrerNummer);
         return neuLehrer;
     }
-
+    /**
+     * Entfernt einen Lehrer.
+     */
     public void lehrerEntfernen() {
         LehrerNummer lehrerNummer = Eingabe.lehrerNummer();
         try {

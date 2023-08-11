@@ -28,15 +28,27 @@ import java.util.ArrayList;
 
 public class KlassenController {
     private final Verwalten verwalten;
-
+    /**
+     * Konstruktor für den KlassenController.
+     *
+     * @param verwalten Das Verwaltungsobjekt, mit dem der Controller arbeitet.
+     */
     public KlassenController(Verwalten verwalten) {
         this.verwalten = verwalten;
     }
+    /**
+     * Zeigt Details aller Klassen an.
+     */
     public void klassenZeigen() {
         for (Klasse klasse : verwalten.getKlassenList()){
             MyBufferedReader.print(Ausgabe.klasseDetails().formatted(klasse.getName(),klasse.getBeschreibung(),klasse.getStufe()));
         }
     }
+    /**
+     * Zeigt Details einer bestimmten Klasse an.
+     *
+     * @param klassenName Der Name der gesuchten Klasse.
+     */
     public void bestimmteKlasseZeigen (Name klassenName) {
         for (Klasse klasse: verwalten.getKlassenList()){
             if (klasse.getName().equals(klassenName)) {
@@ -45,7 +57,9 @@ public class KlassenController {
         }
         Ausgabe.klasseNichtGefunden(klassenName);
     }
-
+    /**
+     * Zeigt die Schüler in einer bestimmten Klasse an.
+     */
     public void schuelerInDerKlasseZeigen() {
         Name klassenname = Eingabe.klassenName();
         try {
@@ -54,12 +68,20 @@ public class KlassenController {
             Ausgabe.klasseNichtGefunden(klassenname);
         }
     }
+    /**
+     * Zeigt die Details der einzelnen Schüler in einer gegebenen Klasse an.
+     *
+     * @param klasse Die Klasse, für die die Schülerdetails angezeigt werden sollen.
+     */
     private static void schuelerEinzelZeigen(Klasse klasse) {
         for (Schueler schueler: klasse.getSchuelers()) {
             MyBufferedReader.print(Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(), schueler.getVorname()
                 , schueler.getNachname(), schueler.getGeburtsdatum().toString(), schueler.getAdresse().getAdresses(), schueler.getTelefon()));
         }
     }
+    /**
+     * Zeigt die Lehrer in einer bestimmten Klasse an.
+     */
     public  void lehrerInderKlasseZeigen() {
         Name klassenname = Eingabe.klassenName();
         try {
@@ -68,6 +90,11 @@ public class KlassenController {
             Ausgabe.klasseNichtGefunden(klassenname);
         }
     }
+    /**
+     * Zeigt die Details der einzelnen Lehrer in einer gegebenen Klasse an.
+     *
+     * @param klasse Die Klasse, für die die Lehrerdetails angezeigt werden sollen.
+     */
     private static void lehrerEinzelZeigen(Klasse klasse) {
         for (Lehrer lehrer: klasse.getLehrers()) {
             MyBufferedReader.print(Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()

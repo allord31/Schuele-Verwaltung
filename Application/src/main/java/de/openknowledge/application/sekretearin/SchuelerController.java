@@ -36,16 +36,28 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 public class SchuelerController {
     private final Verwalten verwalten;
-
+    /**
+     * Konstruktor für den SchuelerController.
+     *
+     * @param verwalten Das Verwaltungsobjekt, mit dem der Controller arbeitet.
+     */
     public SchuelerController(Verwalten verwalten) {
         this.verwalten = verwalten;
     }
+    /**
+     * Zeigt Details aller Schüler an.
+     */
     public void schuelerZeigen() {
         for (Schueler schueler: verwalten.getSchuelerList()) {
             MyBufferedReader.print(Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(),schueler.getVorname()
                 ,schueler.getNachname(),schueler.getGeburtsdatum().toString(),schueler.getAdresse().getAdresses(), schueler.getTelefon()));
         }
     }
+    /**
+     * Zeigt Details eines bestimmten Schülers an.
+     *
+     * @param schuelerNummer Die Nummer des gesuchten Schülers.
+     */
     public void bestimmteSchuelerZeigen(SchuelerNummer schuelerNummer) {
         for (Schueler schueler :verwalten.getSchuelerList()) {
             if (schueler.getSchuelerNummerObje().equals(schuelerNummer)) {
@@ -56,7 +68,9 @@ public class SchuelerController {
         }
         Ausgabe.schuelerNichtGefunden(schuelerNummer);
     }
-
+    /**
+     * Versetzt einen Schüler in eine andere Klasse.
+     */
     public void schuelerUmsetzen() {
         SchuelerNummer schuelerNummer = Eingabe.schuelerNummer();
         Name klassenName = Eingabe.klassenName();
@@ -70,7 +84,9 @@ public class SchuelerController {
             Ausgabe.schuelerIstInDieseKlasse(klassenName,  schuelerNummer);
         }
     }
-
+    /**
+     * Fügt einen neuen Schüler hinzu.
+     */
     public void schuelerAddieren() {
         Schueler neuSchueler = schuelerErstellen();
         try {
@@ -79,7 +95,11 @@ public class SchuelerController {
             Ausgabe.schuelerIstInDerSchuele(neuSchueler);
         }
     }
-
+    /**
+     * Erstellt ein Schüler-Objekt mit den angegebenen Attributen.
+     *
+     * @return Ein neu erstelltes Schüler-Objekt.
+     */
     private static Schueler schuelerErstellen() {
         SchuelerNummer schuelerNummer= Eingabe.schuelerNummer();
         Name vorname = Eingabe.vorname();
@@ -94,6 +114,9 @@ public class SchuelerController {
         AdressenList adressenList = new AdressenList(adresse);
         return new Schueler(vorname, nachname, geburtsdatum, telefon, adressenList, schuelerNummer);
     }
+    /**
+     * Entfernt einen Schüler.
+     */
     public void schuelerEntfernen() {
         SchuelerNummer schuelerNummer = Eingabe.schuelerNummer();
         try {
