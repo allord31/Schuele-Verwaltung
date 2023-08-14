@@ -18,31 +18,30 @@ package de.openknowledge.application.gui;
 import de.openknowledge.application.controlinterface.MainInterface;
 import de.openknowledge.application.einundausgabe.Eingabe;
 import de.openknowledge.application.guiservices.KopfVonServices;
-import de.openknowledge.application.testdata.BereitendeKlassen;
-import de.openknowledge.application.testdata.BereitendeLehrer;
-import de.openknowledge.application.testdata.BereitendeSchueler;
+import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.application.testdata.DataBank;
-import de.openknowledge.application.testdata.SchuelerOderLehrerVerteilen;
 import de.openknowledge.domain.verwaltung.Verwalten;
 
 
 public class Main {
 
     public static void main(String[] args) {
+
         //testdata
         DataBank dataBank = new DataBank();
         //Create verwaltung
         Verwalten verwalten = new Verwalten(dataBank.getKlassenArray(), dataBank.getLehrerArray(), dataBank.getSchuelerArray());
 
         //create interface and controller
+        KopfVonServices kopfVonServices = new KopfVonServices(verwalten);
         while (true) {
             MainInterface.mainInterfaceZeigen();
-            KopfVonServices kopfVonServices = new KopfVonServices(verwalten);
             switch (Eingabe.auswahl(1, 6)) {
                 case 1 -> kopfVonServices.zeigen();
                 case 2 -> kopfVonServices.umsetzen();
                 case 3 -> kopfVonServices.neuSchuerlerOderLehrerEinfuegen();
                 case 4 -> kopfVonServices.entfernenLehrerOderSchuelerVonSchule();
+                case 5 -> kopfVonServices.setSprache();
                 case 6 -> System.exit(0);
             }
         }

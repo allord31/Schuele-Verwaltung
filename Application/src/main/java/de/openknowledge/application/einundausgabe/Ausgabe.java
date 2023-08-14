@@ -14,6 +14,8 @@ package de.openknowledge.application.einundausgabe;/*
  * limitations under the License.
  */
 
+import de.openknowledge.application.guiservices.KopfVonServices;
+import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.attribute.SchuelerNummer;
@@ -21,61 +23,52 @@ import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 import de.openknowledge.domain.verwaltung.schueler.Schueler;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
+import java.util.ResourceBundle;
+
 public class Ausgabe {
+    private static ResourceBundle resourceBundle = new Sprachen().getResourceBundle();
+    public static void setResourceBundle(ResourceBundle setResourceBundle) {
+        resourceBundle = setResourceBundle;
+    }
     public static void klasseNichtGefunden(Name klassenName) {
-        MyBufferedReader.print("Dies Klasse "+ klassenName.getName()+ " ist nicht exist.");
+        MyBufferedReader.print(resourceBundle.getString("klasseNichtGefunden").formatted(klassenName));
     }
     public static String klasseDetails() {
-        return """
-                Klasse Name: %s
-                Klasse beschreibung: %s
-                klasse Stufe: %s""";
+        return resourceBundle.getString("klasseDetails");
     }
     public static void lehrerNichtGefunden(LehrerNummer lehrerNummer) {
-        MyBufferedReader.print("Diese Lehrer mit der Nummer "+ lehrerNummer.getLehrerNummer() +" ist nicht exist.");
+        MyBufferedReader.print(resourceBundle.getString("lehrerNichtGefunden").formatted(lehrerNummer));
     }
     public static void lehrerIstInDieseKlasse(Name klassenname,LehrerNummer lehrerNummer) {
-        MyBufferedReader.print("Diese Lehrer mit der Nummer "+ lehrerNummer.getLehrerNummer() +" ist in diese Klasse " +klassenname.getName()+" bereit exist.");
+        MyBufferedReader.print(resourceBundle.getString("lehrerIstInDieseKlasse").formatted(lehrerNummer.getLehrerNummer(),klassenname));
     }
     public static void lehrerIstInDerSchuele(Lehrer lehrer) {
-        MyBufferedReader.print("Diese Lehrer " + lehrer.getVorname() + " " + lehrer.getNachname()
-            +" ist schon bereit eingefügt worden.");
+        MyBufferedReader.print(resourceBundle.getString("lehrerIstInDerSchuele").formatted(lehrer.getVorname(),lehrer.getNachname()));
     }
     public static void lehrerEntfernen(LehrerNummer lehrerNummer) {
-        MyBufferedReader.print("Diese Lehrer mit der Nummer: " + lehrerNummer.getLehrerNummer() + " ist nicht in der Schule, um zu entfernen.");
+        MyBufferedReader.print(resourceBundle.getString("lehrerEntfernen").formatted(lehrerNummer.getLehrerNummer()));
     }
     public static String lehrerDetails() {
-        return """
-                
-                Lehrer Nummer: %s, Lehrer Vorname: %s, Lehrer Nachname: %s, Geburtsdatum: %s
-                Adresse: %s
-                Telefon Nummer: %s""";
+        return resourceBundle.getString("lehrerDetails");
     }
     public static void schuelerNichtGefunden(SchuelerNummer schuelerNummer) {
-        MyBufferedReader.print("Diese Schüler mit der Nummer "+ schuelerNummer.getSchulerNummer() +" ist nicht exist.");
+        MyBufferedReader.print(resourceBundle.getString("schuelerNichtGefunden").formatted(schuelerNummer.getSchulerNummer()));
     }
-    public static void schuelerIstInDieseKlasse(Name klassenname, SchuelerNummer schuelerNummer) {
-        MyBufferedReader.print("Diese Schüler mit der Nummer "+ schuelerNummer.getSchulerNummer() +" ist in diese Klasse " +klassenname.getName()+" bereit exist.");
+    public static void schuelerIstInDieseKlasse (Name klassenname, SchuelerNummer schuelerNummer) {
+        MyBufferedReader.print(resourceBundle.getString("schuelerIstInDieseKlasse").formatted(schuelerNummer.getSchulerNummer(),klassenname.getName()));
     }
     public static void schuelerIstInDerSchuele(Schueler schueler) {
-        MyBufferedReader.print("Diese Schüler " + schueler.getVorname() + " " + schueler.getNachname()
-            +" ist schon bereit eingefügt worden.");
+        MyBufferedReader.print(resourceBundle.getString("schuelerIstInDerSchuele").formatted(schueler.getVorname(), schueler.getNachname()));
     }
     public static void schuelerEntfernen(SchuelerNummer schuelerNummer) {
-        MyBufferedReader.print("Diese Schüler mit der Nummer: " + schuelerNummer.getSchulerNummer() + " ist nicht in der Schule, um zu entfernen.");
+        MyBufferedReader.print(resourceBundle.getString("schuelerEntfernen").formatted(schuelerNummer.getSchulerNummer()));
     }
 
     public static String schuelerDetails() {
-        return """
-                
-                Schüler Nummer: %s, Schüler Vorname: %s, Schüler Nachname: %s, Geburtsdatum: %s
-                Adresse: %s
-                Telefon Nummer: %s
-                """;
+        return resourceBundle.getString("schuelerDetails");
     }
     public static void neuVersuch() {
-        MyBufferedReader.print("Wollen Sie erneut versuchen. 1. Ja oder 2. Nein ");
+        MyBufferedReader.print(resourceBundle.getString("neuVersuch"));
     }
-
 
 }

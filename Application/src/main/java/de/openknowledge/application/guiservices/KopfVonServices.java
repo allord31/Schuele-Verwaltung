@@ -16,17 +16,21 @@ package de.openknowledge.application.guiservices;
  */
 
 import de.openknowledge.application.controlinterface.MainInterface;
+import de.openknowledge.application.einundausgabe.Ausgabe;
 import de.openknowledge.application.einundausgabe.Eingabe;
 import de.openknowledge.application.sekretearin.KlassenController;
 import de.openknowledge.application.sekretearin.LehrerController;
 import de.openknowledge.application.sekretearin.SchuelerController;
 import de.openknowledge.domain.verwaltung.Verwalten;
 
+import java.util.ResourceBundle;
+
 public class KopfVonServices {
-    Verwalten verwalten;
-    KlassenController klassenController;
-    LehrerController lehrerController;
-    SchuelerController schuelerController;
+    private Verwalten verwalten;
+    private KlassenController klassenController;
+    private LehrerController lehrerController;
+    private SchuelerController schuelerController;
+    Sprachen sprache = new Sprachen();
 
     public KopfVonServices(Verwalten verwalten) {
         this.verwalten = verwalten;
@@ -72,4 +76,19 @@ public class KopfVonServices {
             case 2 -> schuelerController.schuelerEntfernen();
         }
     }
+    public void setSprache() {
+        if (MainInterface.mainInterfaceRueckGeben().contains("Englisch")) {
+            sprache.setEnglish();
+            MainInterface.setResourceBundle(sprache.getResourceBundle());
+            Ausgabe.setResourceBundle(sprache.getResourceBundle());
+            Eingabe.setResourceBundle(sprache.getResourceBundle());
+        } else {
+            sprache.setDeutsch();
+            MainInterface.setResourceBundle(sprache.getResourceBundle());
+            Ausgabe.setResourceBundle(sprache.getResourceBundle());
+            Eingabe.setResourceBundle(sprache.getResourceBundle());
+
+        }
+    }
 }
+

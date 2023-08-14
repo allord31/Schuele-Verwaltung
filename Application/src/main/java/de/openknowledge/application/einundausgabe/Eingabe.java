@@ -15,6 +15,8 @@ package de.openknowledge.application.einundausgabe;
  * limitations under the License.
  */
 
+import de.openknowledge.application.guiservices.KopfVonServices;
+import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.domain.verwaltung.attribute.Geburtsdatum;
 import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
 import de.openknowledge.domain.verwaltung.attribute.SchuelerNummer;
@@ -27,95 +29,98 @@ import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.AdresszeileEins;
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Plz;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
+
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 
 
 public class Eingabe {
+    private static ResourceBundle resourceBundle = new Sprachen().getResourceBundle();
    private static Scanner input = new Scanner(System.in);
-    public static Integer auswahl(Integer anfangReichweit, Integer endeReichweit) {
+    public static void setResourceBundle(ResourceBundle setResourceBundle) {
+        resourceBundle = setResourceBundle;
+    }
+    public static Integer auswahl(Integer anfangReichweite, Integer endeReichweite) {
         try {
             Integer eingabe =Integer.parseInt(Validieren.eingegebeneWertValidieren("\\d+",input.nextLine()));
-            if (eingabe >= anfangReichweit && eingabe <= endeReichweit) {
+            if (eingabe >= anfangReichweite && eingabe <= endeReichweite) {
                 return eingabe;
             } else {
-                MyBufferedReader.print("Sie müssen zwischen " + anfangReichweit+ " und " + endeReichweit + " auswählen.");
-                return auswahl(anfangReichweit, endeReichweit);
+                MyBufferedReader.print(resourceBundle.getString("AuswahlReichweite"));
+                return auswahl(anfangReichweite, endeReichweite);
             }
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(String.valueOf(eingabe));
-           return auswahl(anfangReichweit,endeReichweit);
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeEingabe"));
+           return auswahl(anfangReichweite,endeReichweite);
         }
     }
     public static Plz plz() {
-        MyBufferedReader.print("Geben Sie die Postleitzahl ein: ");
+        MyBufferedReader.print(resourceBundle.getString("Eingabe_PLZ"));
         try {
             return new Plz(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "\n PLZ muss aus 5 Ziffern 0-9 bestehen.");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigePLZ"));
             return plz();
         }
     }
     public static Geburtsdatum geburtsdatum() {
-        MyBufferedReader.print("Geben Sie das Geburtsdatum ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeGeburtsdatum"));
         try {
             return new Geburtsdatum(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Das Geburtsdatum muss dieses Format haben: \"JJJJ-MM-TT || 2000-12-31\"");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeGeburtsdatum"));
             return geburtsdatum();
         }
     }
     public static AdresszeileEins adresszeileEins() {
-        MyBufferedReader.print("Geben Sie die Adresse Zeile Eins ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeAdresszeileEins"));
         try {
             return new AdresszeileEins(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Adresszeile besteht aus mindestens 1 und höchstens 80 Zeichen");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeAdresszeileEins"));
             return adresszeileEins();
         }
     }
     public static AdresszeileZwei adresszeileZwei() {
-        MyBufferedReader.print("Geben Sie die Adresse Zeile Zwei ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeAdresszeileZwei"));
         try {
             return new AdresszeileZwei(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Adresszeile besteht aus mindestens 1 und höchstens 80 Zeichen");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeAdresszeileZwei"));
             return adresszeileZwei();
         }
     }
     public static Name vorname() {
-        MyBufferedReader.print("Geben Sie den vorname ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeVorname"));
         try {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Der Vorname wird nur akzeptiert," +
-                " wenn der aus Buchstaben besteht, und aus mindestens 1 und höchstens 50 Zeichen.");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeVorname"));
             return vorname();
         }
     }
     public static Name nachname() {
-        MyBufferedReader.print("Geben Sie den nachname ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeNachname"));
         try {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Der Nachname wird nur akzeptiert," +
-                " wenn der aus Buchstaben besteht, und aus mindestens 1 bis 50 Buchstabe.");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeNachname"));
             return nachname();
         }
     }
     public static Name klassenName() {
-        MyBufferedReader.print("Geben Sie den Klassenname ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeKlassenname"));
         try {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "Der Klassenname wird nur akzeptiert," +
-                " wenn der aus Buchstaben besteht, und aus mindestens 1 bis 50 Buchstabe.");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeKlassenname"));
             return klassenName();
         }
     }
 
     public static Telefon telefon() {
-        MyBufferedReader.print("Geben Sie die Telefon Nummer ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeTelefon"));
         try {
             return new Telefon(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
@@ -125,30 +130,29 @@ public class Eingabe {
 
     }
     public static Stadt stadt() {
-        MyBufferedReader.print("Geben Sie die Stadt ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeStadt"));
         try {
             return new Stadt(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "\nStat besteht aus mindestens 1 und höchstens 50 Zeichen");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeStadt"));
             return stadt();
         }
     }
     public static LehrerNummer lehrerNummer() {
-        MyBufferedReader.print("Geben Sie die lehrer Nummer ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeLehrerNummer"));
         try {
             return new LehrerNummer(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "\n Telefonnummern unterstützen nur neben Ziffern nur die" +
-                ", Eingabe folgender Zeichen: runde Klammern, Schrägstrich, Bindestrich, Leerzeichen");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeLehrerNummer"));
             return lehrerNummer();
         }
     }
     public static SchuelerNummer schuelerNummer() {
-        MyBufferedReader.print("Geben Sie die lehrer Nummer ein: ");
+        MyBufferedReader.print(resourceBundle.getString("EingabeSchuelerNummer"));
         try {
             return new SchuelerNummer(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage() + "\n Schülernummer ist genau 12 Zeichen lang und besteht aus Großbuchstaben und Ziffern");
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeSchuelerNummer"));
             return schuelerNummer();
         }
     }
