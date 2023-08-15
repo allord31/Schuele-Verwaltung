@@ -14,8 +14,8 @@ package de.openknowledge.infrastruktur.exception;/*
  * limitations under the License.
  */
 
-public class IstPersonInKlasse extends Exception{
-    public IstPersonInKlasse(String message){
+public class PersonIstInDerKlasse extends Exception{
+    public PersonIstInDerKlasse(String message){
         super(message);
     }
 }

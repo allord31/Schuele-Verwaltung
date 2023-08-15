@@ -28,7 +28,6 @@ import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.KlasseExist;
 import de.openknowledge.infrastruktur.exception.PersonExist;
-import de.openknowledge.infrastruktur.exception.IstPersonInKlasse;
 
 public class Verwalten {
 
@@ -53,16 +52,12 @@ public class Verwalten {
 
     public void removeSchueler(SchuelerNummer schuelerNummer) throws KeinPerson {
         Schueler schueler = getSchueler(schuelerNummer);
-        try {
             if (schuelerList.contains(schueler)) {
                 schuelerList.remove(schueler);
                 schuelerInKlasse(schuelerNummer).removeSchueler(schueler);
             } else {
                 throw new KeinPerson(schueler.getSchuelerNummerObje().getSchulerNummer());
             }
-        } catch (IstPersonInKlasse ignored) {
-
-        }
     }
 
     public void addSchuelerInKlasse(Name klassenName, SchuelerNummer schuelerNummer) throws KeineKlasse, KeinPerson {
@@ -77,7 +72,7 @@ public class Verwalten {
         }
     }
 
-    public void schuelerUmsetzen(Name klassenName, SchuelerNummer schuelerNummer) throws KeineKlasse, KeinPerson, IstPersonInKlasse {
+    public void schuelerUmsetzen(Name klassenName, SchuelerNummer schuelerNummer) throws KeineKlasse, KeinPerson{
         Klasse istSchuelerBereitInEinderKLasseGetKlasse = schuelerInKlasse(schuelerNummer);
         addSchuelerInKlasse(klassenName, schuelerNummer);
         if (istSchuelerBereitInEinderKLasseGetKlasse != null) {
@@ -85,7 +80,7 @@ public class Verwalten {
         }
     }
 
-    private Klasse schuelerInKlasse(SchuelerNummer schuelerNummer) throws IstPersonInKlasse {
+    private Klasse schuelerInKlasse(SchuelerNummer schuelerNummer) throws KeinPerson {
         for (Klasse klasse : klassenList) {
             for (Schueler schueler : klasse.getSchuelers()) {
                 if (schueler.getSchuelerNummerObje().equals(schuelerNummer)) {
@@ -93,8 +88,7 @@ public class Verwalten {
                 }
             }
         }
-        throw new IstPersonInKlasse("Diese Schüler mit der Nunmmer: " + schuelerNummer + " Ist nicht in den Klassen.");
-
+        throw new KeinPerson("Diese Schüler mit der Nunmmer: " + schuelerNummer + " Ist nicht in den Klassen.");
     }
 
     private boolean istSchuelerDa(Name klassenName, SchuelerNummer schuelerNummer) throws KeineKlasse {
@@ -175,8 +169,6 @@ public class Verwalten {
             }
         } catch (KeineKlasse  e) {
             //logging schreiben.
-        } catch (IstPersonInKlasse ignored) {
-
         }
     }
 
@@ -192,7 +184,7 @@ public class Verwalten {
         }
     }
 
-    public void lehrerUmsetzen(Name klassenName, LehrerNummer lehrerNummer) throws KeineKlasse, KeinPerson, IstPersonInKlasse {
+    public void lehrerUmsetzen(Name klassenName, LehrerNummer lehrerNummer) throws KeineKlasse, KeinPerson {
         Klasse istLehrerBereitInEinderKLasseGetKlasse = lehrerInKlasse(lehrerNummer);
         addLehrerInKlasse(klassenName, lehrerNummer);
         if (istLehrerBereitInEinderKLasseGetKlasse != null) {
@@ -201,15 +193,15 @@ public class Verwalten {
     }
 
 
-    private Klasse lehrerInKlasse(LehrerNummer lehrerNummer) throws IstPersonInKlasse {
+    private Klasse lehrerInKlasse(LehrerNummer lehrerNummer) throws KeinPerson {
         for (Klasse klasse : klassenList) {
             for (Lehrer lehrer : klasse.getLehrers()) {
-                if (lehrer.getLehrerNummerObje().equals(lehrerNummer)) {
+                if (lehrer.getLehrerNummerObje().getLehrerNummer().equals(lehrerNummer.getLehrerNummer())) {
                     return klasse;
                 }
             }
         }
-        throw new IstPersonInKlasse("Der Lehrer mit der Nummer " + lehrerNummer + " ist nicht in der Klasse");
+        throw new KeinPerson("Der Lehrer mit der Nummer " + lehrerNummer + " ist nicht in der Klasse");
     }
 
     private boolean istLehrerDa(Name klassenName, LehrerNummer lehrerNummer) throws KeineKlasse {

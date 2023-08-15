@@ -14,7 +14,6 @@ package de.openknowledge.application.einundausgabe;/*
  * limitations under the License.
  */
 
-import de.openknowledge.application.guiservices.KopfVonServices;
 import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
 import de.openknowledge.domain.verwaltung.attribute.Name;
@@ -37,7 +36,7 @@ public class Ausgabe {
         return resourceBundle.getString("klasseDetails");
     }
     public static void lehrerNichtGefunden(LehrerNummer lehrerNummer) {
-        MyBufferedReader.print(resourceBundle.getString("lehrerNichtGefunden").formatted(lehrerNummer));
+        MyBufferedReader.print(resourceBundle.getString("lehrerNichtGefunden").formatted(lehrerNummer.getLehrerNummer()));
     }
     public static void lehrerIstInDieseKlasse(Name klassenname,LehrerNummer lehrerNummer) {
         MyBufferedReader.print(resourceBundle.getString("lehrerIstInDieseKlasse").formatted(lehrerNummer.getLehrerNummer(),klassenname));

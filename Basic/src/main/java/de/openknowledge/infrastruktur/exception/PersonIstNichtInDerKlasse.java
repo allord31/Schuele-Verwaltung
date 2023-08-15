@@ -1,4 +1,4 @@
-package de.openknowledge.application.testdata;/*
+package de.openknowledge.infrastruktur.exception;/*
  * Copyright (C) open knowledge GmbH.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,9 @@ package de.openknowledge.application.testdata;/*
  * limitations under the License.
  */
 
-import de.openknowledge.domain.verwaltung.klasse.Klasse;
-import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
-import de.openknowledge.domain.verwaltung.schueler.Schueler;
-
-import java.util.ArrayList;
-
-public class SchuelerOderLehrerVerteilen {
-
+public class PersonIstNichtInDerKlasse extends Exception{
+    public PersonIstNichtInDerKlasse (String massage) {
+        super(massage);
+    }
 
 }

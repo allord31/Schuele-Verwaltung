@@ -28,7 +28,7 @@ import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.AdresszeileZ
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Plz;
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Stadt;
 import de.openknowledge.domain.verwaltung.schueler.Schueler;
-import de.openknowledge.infrastruktur.exception.IstPersonInKlasse;
+import de.openknowledge.infrastruktur.exception.PersonIstInDerKlasse;
 import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
@@ -80,8 +80,6 @@ public class SchuelerController {
             Ausgabe.schuelerNichtGefunden(schuelerNummer);
         } catch (KeineKlasse e) {
             Ausgabe.klasseNichtGefunden(klassenName);
-        } catch (IstPersonInKlasse e) {
-            Ausgabe.schuelerIstInDieseKlasse(klassenName,  schuelerNummer);
         }
     }
     /**

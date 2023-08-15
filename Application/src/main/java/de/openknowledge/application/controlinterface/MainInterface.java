@@ -22,6 +22,7 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 public class MainInterface {
     private static ResourceBundle resourceBundle = new Sprachen().getResourceBundle();
+
     public static void mainInterfaceZeigen() {
         MyBufferedReader.print("\n" + resourceBundle.getString("hauptMenu"));
     }

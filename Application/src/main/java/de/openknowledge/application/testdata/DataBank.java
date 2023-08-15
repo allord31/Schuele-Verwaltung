@@ -23,25 +23,30 @@ import de.openknowledge.domain.verwaltung.schueler.Schueler;
 import java.util.ArrayList;
 
 public class DataBank {
-    private BereitendeKlassen bereitendeKlassen = new BereitendeKlassen();
-    private BereitendeLehrer bereitendeLehrer = new BereitendeLehrer();
-    private BereitendeSchueler bereitendeSchueler = new BereitendeSchueler();
+    private ArrayList<Klasse> bereitendeKlassen = new ArrayList<>();
+    private ArrayList<Lehrer> bereitendeLehrer = new ArrayList<>();
+    private ArrayList<Schueler> bereitendeSchueler = new ArrayList<>();
 
 
     public DataBank() {
     }
+    public DataBank(BereitendeKlassen bereitendeKlassen, BereitendeLehrer bereitendeLehrer, BereitendeSchueler bereitendeSchueler) {
+        this.bereitendeKlassen.addAll(bereitendeKlassen.getKlassenList());
+        this.bereitendeLehrer.addAll(bereitendeLehrer.getlehrer());
+        this.bereitendeSchueler.addAll(bereitendeSchueler.getSchueler());
+    }
 
 
     public ArrayList<Klasse> getKlassenArray() {
-        lehrerVerteilenKlasse(bereitendeKlassen.getKlassenList(), bereitendeLehrer.getlehrer());
-        schuelerVerteilenInKlasse(bereitendeKlassen.getKlassenList(), bereitendeSchueler.getSchueler());
-        return bereitendeKlassen.getKlassenList();
+        lehrerVerteilenKlasse(bereitendeKlassen, bereitendeLehrer);
+        schuelerVerteilenInKlasse(bereitendeKlassen, bereitendeSchueler);
+        return bereitendeKlassen;
     }
     public ArrayList<Lehrer> getLehrerArray() {
-        return bereitendeLehrer.getlehrer();
+        return bereitendeLehrer;
     }
     public ArrayList<Schueler> getSchuelerArray(){
-        return bereitendeSchueler.getSchueler();
+        return bereitendeSchueler;
     }
     private static void schuelerVerteilenInKlasse(ArrayList<Klasse> klasseArrayList, ArrayList<Schueler> schuelerArrayList) {
         int counter = 0;

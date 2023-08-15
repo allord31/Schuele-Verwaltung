@@ -15,7 +15,6 @@ package de.openknowledge.application.einundausgabe;
  * limitations under the License.
  */
 
-import de.openknowledge.application.guiservices.KopfVonServices;
 import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.domain.verwaltung.attribute.Geburtsdatum;
 import de.openknowledge.domain.verwaltung.attribute.LehrerNummer;
@@ -47,7 +46,7 @@ public class Eingabe {
             if (eingabe >= anfangReichweite && eingabe <= endeReichweite) {
                 return eingabe;
             } else {
-                MyBufferedReader.print(resourceBundle.getString("AuswahlReichweite"));
+                MyBufferedReader.print(resourceBundle.getString("AuswahlReichweite").formatted(anfangReichweite, endeReichweite));
                 return auswahl(anfangReichweite, endeReichweite);
             }
         } catch (UngueltigeEingabe eingabe) {

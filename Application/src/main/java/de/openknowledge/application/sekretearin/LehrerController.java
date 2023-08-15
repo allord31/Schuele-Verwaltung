@@ -32,7 +32,7 @@ import de.openknowledge.domain.verwaltung.lehrer.Lehrer;
 import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
-import de.openknowledge.infrastruktur.exception.IstPersonInKlasse;
+import de.openknowledge.infrastruktur.exception.PersonIstInDerKlasse;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 public class LehrerController {
 
@@ -81,8 +81,6 @@ public class LehrerController {
         Ausgabe.lehrerNichtGefunden(lehrerNummer);
     } catch (KeineKlasse e) {
         Ausgabe.klasseNichtGefunden(klassenName);
-    } catch (IstPersonInKlasse e) {
-        Ausgabe.lehrerIstInDieseKlasse(klassenName, lehrerNummer);
     }
     }
     /**
