@@ -16,15 +16,16 @@
 
 package de.openknowledge.infrastruktur.printing;
 
-
-
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class MyBufferedReader {
 
+    static Logger logger = Logger.getLogger(MyBufferedReader.class.getName());
     public static void print(String input) {
-        Logger logger = Logger.getLogger("MyBufferedReader");
-        logger.info(input);
+        logger.trace(input);
+
     }
+
+
 
 }
