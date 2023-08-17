@@ -21,16 +21,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 public class Validieren {
-    /**
-     * Überprüft den vom Benutzer eingegebenen Text auf Gültigkeit und gleicht ihn mit dem angegebenen regulären Ausdruck ab.
-     *
-     * @param regex Der reguläre Ausdruck, mit dem der eingegebene Text abgeglichen wird.
-     * @return Der vom Benutzer eingegebene Text, wenn er erfolgreich mit dem regulären Ausdruck übereinstimmt.
-     * @throws UngueltigeEingabe Wenn der eingegebene Text nicht mit dem regulären Ausdruck übereinstimmt.
-     */
-
-
+    private static Logger log = Logger.getLogger(Validieren.class.getName());
     /**
      * Überprüft den Text auf Gültigkeit und gleicht ihn mit dem angegebenen regulären Ausdruck ab.
      *
@@ -45,6 +39,7 @@ public class Validieren {
             if (matcher.matches()){
                 return zeichen;
             } else {
+                log.warn("Der Benutzer hat ungültige Eingabe eingegeben.");
                 throw new UngueltigeEingabe(zeichen);
             }
     }

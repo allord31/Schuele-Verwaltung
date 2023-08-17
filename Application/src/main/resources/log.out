@@ -1,72 +1,23 @@
-2023-08-16 16:05:07,328 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:09:10,938 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:12:55,758 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:13:54,009 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:17:55,955 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:18:13,249 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:21:53,164 TRACE MyBufferedReader:25 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:21:53,168 INFO  MyBufferedReader:26 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
-2023-08-16 16:21:53,168 WARN  MyBufferedReader:27 - 
-1.zeige
-2.Schüler, Lehrer in einer klasse umsetzen
-3.Neue Schüler oder Lehrer in der Schule einfügen.
-4.Schüler Oder Lehrer entfernen.
-5.Englisch
-6.beenden
-Wählen Sie eine Nummer aus.
+2023-08-17 14:34:53,550 WARN  Main:34 - Anwendung ist gestartet.
+2023-08-17 14:34:53,593 INFO  Main:41 - Test Data wurde erstellt.
+2023-08-17 14:36:02,884 WARN  Main:34 - Anwendung ist gestartet.
+2023-08-17 14:36:02,911 INFO  Main:41 - Test Data wurde erstellt.
+2023-08-17 14:37:39,382 TRACE KlassenController:50 - Klassen wurden gezeigt.
+2023-08-17 14:37:44,151 TRACE LehrerController:60 - lehrer List gezeigt.
+2023-08-17 14:37:46,326 TRACE SchuelerController:57 - Schüler wurden gezeigt.
+2023-08-17 14:37:59,854 WARN  Validieren:42 - Der Benutzer hat ungültige Eingabe eingegeben.
+2023-08-17 14:37:59,855 WARN  Eingabe:157 - Der Benutzer hat ungültige Lehrernummer eingegeben.
+2023-08-17 14:38:03,245 WARN  Verwalten:236 - Die Lehrer ist nicht existiert
+2023-08-17 14:39:28,086 WARN  Verwalten:153 - Die gesuchte Klasse ist nicht exist
+2023-08-17 14:39:55,175 INFO  LehrerController:85 - Lehrer wurde umgesetzt.
+2023-08-17 14:40:27,411 WARN  Verwalten:153 - Die gesuchte Klasse ist nicht exist
+2023-08-17 14:46:35,374 WARN  Main:34 - Anwendung ist gestartet.
+2023-08-17 14:46:35,400 INFO  Main:41 - Test Data wurde erstellt.
+2023-08-17 14:46:39,579 TRACE LehrerController:60 - lehrer List gezeigt.
+2023-08-17 14:46:50,591 INFO  LehrerController:110 - Lehrer erstellen
+2023-08-17 14:48:23,844 INFO  LehrerController:123 - Lehrer wurde erstellt.
+2023-08-17 14:48:23,845 INFO  LehrerController:99 - Lehrer wurde eingefügt.
+2023-08-17 14:56:19,470 WARN  Main:34 - Anwendung ist gestartet.
+2023-08-17 14:56:19,498 INFO  Main:41 - Test Data wurde erstellt.
+2023-08-17 14:56:39,706 WARN  Verwalten:236 - Die Lehrer ist nicht existiert
+2023-08-17 14:56:48,165 INFO  Main:57 - Der benutzer hat die Anwendung beenden.

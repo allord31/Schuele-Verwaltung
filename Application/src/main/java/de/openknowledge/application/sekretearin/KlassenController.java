@@ -16,6 +16,7 @@ package de.openknowledge.application.sekretearin;/*
 
 import de.openknowledge.application.einundausgabe.Ausgabe;
 import de.openknowledge.application.einundausgabe.Eingabe;
+import de.openknowledge.application.guiservices.KopfVonServices;
 import de.openknowledge.domain.verwaltung.Verwalten;
 import de.openknowledge.domain.verwaltung.attribute.Name;
 import de.openknowledge.domain.verwaltung.klasse.Klasse;
@@ -26,7 +27,10 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 public class KlassenController {
+    private static final Logger log = Logger.getLogger(KlassenController.class.getName());
     private final Verwalten verwalten;
     /**
      * Konstruktor für den KlassenController.
@@ -43,6 +47,7 @@ public class KlassenController {
         for (Klasse klasse : verwalten.getKlassenList()){
             MyBufferedReader.print(Ausgabe.klasseDetails().formatted(klasse.getName(),klasse.getBeschreibung(),klasse.getStufe()));
         }
+        log.trace("Klassen wurden gezeigt.");
     }
     /**
      * Zeigt Details einer bestimmten Klasse an.

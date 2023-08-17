@@ -56,35 +56,35 @@ public class BereitendeLehrer {
                 new Geburtsdatum("1965-06-22"),
                 new Telefon("049 168 277 5323"),
                 new AdressenList(new Adresse(new AdresszeileEins("Einstein weg 4/5"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26122"))),new LehrerNummer("123412341234") );
+                    new Stadt("Oldenburg"), new Plz("26122"))),new LehrerNummer("123412341237") );
 
             Lehrer lehrerfive = new Lehrer(new Name("Zilles"), new Name("Markus"),
                 new Geburtsdatum("1977-01-24"), new Telefon("0152/766 2553"),
                 new AdressenList(new Adresse(new AdresszeileEins("Saarlaender weg 45"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26124"))), new LehrerNummer("123412341235"));
+                    new Stadt("Oldenburg"), new Plz("26124"))), new LehrerNummer("123412341238"));
 
             Lehrer lehrersix = new Lehrer(new Name("Wilfried"), new Name("Mull"),
                 new Geburtsdatum("1967-11-15"),
                 new Telefon("0491(587 215 563)"),
                 new AdressenList(new Adresse(new AdresszeileEins("Sonnenallee 9"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26123"))), new LehrerNummer("123412341236"));
+                    new Stadt("Oldenburg"), new Plz("26123"))), new LehrerNummer("123412341239"));
             Lehrer lehrerseven = new Lehrer(new Name("Harms"), new Name("Knut"),
                 new Geburtsdatum("1969-02-11"),
                 new Telefon("123-156(231)"),
                 new AdressenList(new Adresse(new AdresszeileEins("Garten Str. 72"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26125"))), new LehrerNummer("123412341234"));
+                    new Stadt("Oldenburg"), new Plz("26125"))), new LehrerNummer("123412341210"));
 
             Lehrer lehrereght = new Lehrer(new Name("Meschael"), new Name("Kuper"),
                 new Geburtsdatum("1974-04-08"),
                 new Telefon("123222-222"),
                 new AdressenList(new Adresse(new AdresszeileEins("Winkel Str. 16"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26131"))), new LehrerNummer("123412341235"));
+                    new Stadt("Oldenburg"), new Plz("26131"))), new LehrerNummer("123412341211"));
 
             Lehrer lehrerneun = new Lehrer(new Name("zer loy"), new Name("Hertz"),
                 new Geburtsdatum("1987-08-08"),
                 new Telefon("123333-333-333"),
                 new AdressenList(new Adresse(new AdresszeileEins("Norder Str. 18"), new AdresszeileZwei(""),
-                    new Stadt("Oldenburg"), new Plz("26123"))), new LehrerNummer("123412341236"));
+                    new Stadt("Oldenburg"), new Plz("26123"))), new LehrerNummer("123412341212"));
             lehrerArrayList.add(lehrerOne);
             lehrerArrayList.add(lehrerTow);
             lehrerArrayList.add(lehrerThree);

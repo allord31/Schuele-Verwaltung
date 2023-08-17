@@ -19,7 +19,10 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 public class AdressenList {
+    private static Logger log = Logger.getLogger(AdressenList.class.getName());
     ArrayList<Adresse> adresses = new ArrayList<>();
     public AdressenList () {
 
@@ -31,7 +34,7 @@ public class AdressenList {
     public void addNeuAdresse (Adresse neuadresse) {
         for(Adresse adresse: adresses){
             if (adresse.equals(neuadresse)) {
-                MyBufferedReader.print("Diese adresse wurde besetzt.");
+                log.warn("Die Adresse ist besitzt");
                 return;
             } else {
                 adresses.add(neuadresse);

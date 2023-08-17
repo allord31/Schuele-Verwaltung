@@ -28,13 +28,15 @@ import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.AdresszeileZ
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Plz;
 import de.openknowledge.domain.verwaltung.attribute.adresseAtribute.Stadt;
 import de.openknowledge.domain.verwaltung.schueler.Schueler;
-import de.openknowledge.infrastruktur.exception.PersonIstInDerKlasse;
 import de.openknowledge.infrastruktur.exception.KeinPerson;
 import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
+import org.apache.log4j.Logger;
+
 public class SchuelerController {
+    private static final Logger log = Logger.getLogger(SchuelerController.class.getName());
     private final Verwalten verwalten;
     /**
      * Konstruktor für den SchuelerController.
@@ -52,6 +54,7 @@ public class SchuelerController {
             MyBufferedReader.print(Ausgabe.schuelerDetails().formatted(schueler.getSchuelerNummerObje().getSchulerNummer(),schueler.getVorname()
                 ,schueler.getNachname(),schueler.getGeburtsdatum().toString(),schueler.getAdresse().getAdresses(), schueler.getTelefon()));
         }
+        log.trace("Schüler wurden gezeigt.");
     }
     /**
      * Zeigt Details eines bestimmten Schülers an.
@@ -76,6 +79,7 @@ public class SchuelerController {
         Name klassenName = Eingabe.klassenName();
         try {
             verwalten. schuelerUmsetzen(klassenName, schuelerNummer);
+            log.info("Schüler wurde umgesetzt.");
         } catch (KeinPerson e) {
             Ausgabe.schuelerNichtGefunden(schuelerNummer);
         } catch (KeineKlasse e) {
@@ -89,8 +93,10 @@ public class SchuelerController {
         Schueler neuSchueler = schuelerErstellen();
         try {
             verwalten.addNeuSchueler(neuSchueler);
+            log.info("Schüler wurde eingefügt.");
         } catch (PersonExist e) {
             Ausgabe.schuelerIstInDerSchuele(neuSchueler);
+
         }
     }
     /**
@@ -99,6 +105,7 @@ public class SchuelerController {
      * @return Ein neu erstelltes Schüler-Objekt.
      */
     private static Schueler schuelerErstellen() {
+        log.info("Schüler wird erstellt.");
         SchuelerNummer schuelerNummer= Eingabe.schuelerNummer();
         Name vorname = Eingabe.vorname();
         Name nachname = Eingabe.nachname();
@@ -110,6 +117,7 @@ public class SchuelerController {
         Stadt stadt = Eingabe.stadt();
         Adresse adresse = new Adresse(adresszeileEins, adresszeileZwei, stadt, plz);
         AdressenList adressenList = new AdressenList(adresse);
+        log.info("Schüler wurde erstellt.");
         return new Schueler(vorname, nachname, geburtsdatum, telefon, adressenList, schuelerNummer);
     }
     /**
@@ -119,6 +127,7 @@ public class SchuelerController {
         SchuelerNummer schuelerNummer = Eingabe.schuelerNummer();
         try {
             verwalten.removeSchueler(schuelerNummer);
+            log.info("Schüler wurde entfernt.");
         } catch (KeinPerson e) {
             Ausgabe.schuelerEntfernen(schuelerNummer);
         }

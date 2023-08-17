@@ -19,13 +19,8 @@ package de.openknowledge.infrastruktur.printing;
 import org.apache.log4j.Logger;
 
 public class MyBufferedReader {
-
     static Logger logger = Logger.getLogger(MyBufferedReader.class.getName());
     public static void print(String input) {
-        logger.trace(input);
-
+        System.out.println(input);
     }
-
-
-
 }

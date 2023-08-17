@@ -24,6 +24,7 @@ public class Telefon {
     public Telefon(String telefon) throws UngueltigeEingabe {
         this.telefon  = Validieren.normierung("\\d",
             Validieren.eingegebeneWertValidieren("[\\d\\s()/-]+", telefon));
+
     }
 
     public String getTelefon() {

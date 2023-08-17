@@ -29,8 +29,10 @@ import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.KlasseExist;
 import de.openknowledge.infrastruktur.exception.PersonExist;
 
-public class Verwalten {
+import org.apache.log4j.Logger;
 
+public class Verwalten {
+    static Logger log = Logger.getLogger(Verwalten.class.getName());
     private ArrayList<Klasse> klassenList = new ArrayList<>();
     private ArrayList<Schueler> schuelerList = new ArrayList<>();
     private ArrayList<Lehrer> lehrerList = new ArrayList<>();
@@ -44,6 +46,7 @@ public class Verwalten {
 
     public void addNeuSchueler(Schueler schueler) throws PersonExist {
         if (schuelerList.contains(schueler)) {
+            log.warn("Der Benutzer hat ein Schüler eingefügt, der schon in die schüler eingefügt würde.");
             throw new PersonExist(schueler.getSchuelerNummerObje().getSchulerNummer());
         } else {
             schuelerList.add(schueler);
@@ -56,6 +59,7 @@ public class Verwalten {
                 schuelerList.remove(schueler);
                 schuelerInKlasse(schuelerNummer).removeSchueler(schueler);
             } else {
+                log.warn("Der Benutzer wollte ein Schüler entfernen, der schon nicht in die Schule existiert ist.");
                 throw new KeinPerson(schueler.getSchuelerNummerObje().getSchulerNummer());
             }
     }
@@ -88,7 +92,8 @@ public class Verwalten {
                 }
             }
         }
-        throw new KeinPerson("Diese Schüler mit der Nunmmer: " + schuelerNummer + " Ist nicht in den Klassen.");
+        log.warn("Diese Schüler ist nicht in den Klassen.");
+        throw new KeinPerson(schuelerNummer.getSchulerNummer());
     }
 
     private boolean istSchuelerDa(Name klassenName, SchuelerNummer schuelerNummer) throws KeineKlasse {
@@ -108,11 +113,13 @@ public class Verwalten {
                 return schueler;
             }
         }
+        log.warn("Der gesuchte Schüler ist nicht exist");
         throw new KeinPerson(schuelerNummer.getSchulerNummer());
     }
 
     public void addNueKlasse(Klasse klasse) throws KlasseExist {
         if (klassenList.contains(klasse)) {
+            log.warn("Die eingefügte Klasse ist schon ein gefügt.");
             throw new KlasseExist(klasse.getName().getName());
         } else {
             klassenList.add(klasse);
@@ -123,6 +130,7 @@ public class Verwalten {
         if (klassenList.contains(klasse)) {
             klassenList.remove(klasse);
         } else {
+            log.warn("Die Klasse ist nicht in die Schule existiert.");
             throw new KeineKlasse(klasse.getName().getName());
         }
     }
@@ -142,13 +150,14 @@ public class Verwalten {
                 return klasse;
             }
         }
+        log.warn("Die gesuchte Klasse ist nicht exist");
         throw new KeineKlasse(klassenName.getName());
     }
 
     public void addNeuLehrer(Lehrer lehrer) throws PersonExist {
         if (lehrerList.contains(lehrer)) {
-            throw new PersonExist("Der Lehrer" + lehrer.getVorname() + " " + lehrer.getNachname()
-                + " ist schon bereit in der Schule eingefügt worden.");
+            log.warn("Der Lehrer ist schon bereit in der Schule eingefügt worden.");
+            throw new PersonExist(lehrer.getVorname() + " " + lehrer.getNachname());
         } else {
             lehrerList.add(lehrer);
         }
@@ -160,15 +169,14 @@ public class Verwalten {
             if (lehrerList.contains(lehrer)) {
                 lehrerList.remove(lehrer);
                 if (lehrerInKlasse(lehrerNummer) != null) {
-
                     removeLehrerVonKlasse(lehrerInKlasse(lehrerNummer).getName(), lehrerNummer);
                 }
             } else {
-                throw new KeinPerson("Der Lehrer mit der Nummer:"
-                    + lehrer.getLehrerNummerObje().getLehrerNummer() + "ist nicht in der Schüler.");
+                log.warn("Der Lehrer ist nicht in der Schule.");
+                throw new KeinPerson(lehrer.getLehrerNummerObje().getLehrerNummer());
             }
         } catch (KeineKlasse  e) {
-            //logging schreiben.
+            //da braucht man nichts zu machen, da es, wenn es kein lehrer in der Klasse gibt, dann bracht mann dieser Lehrer nicht zu entfernen
         }
     }
 
@@ -201,7 +209,8 @@ public class Verwalten {
                 }
             }
         }
-        throw new KeinPerson("Der Lehrer mit der Nummer " + lehrerNummer + " ist nicht in der Klasse");
+        log.warn("Der Lehrer ist nicht in der Klasse");
+        throw new KeinPerson(lehrerNummer.getLehrerNummer());
     }
 
     private boolean istLehrerDa(Name klassenName, LehrerNummer lehrerNummer) throws KeineKlasse {
@@ -214,6 +223,7 @@ public class Verwalten {
             }
             return false;
         }
+        log.warn("Die ein gegebene Klass ist nicht gefunden.");
         throw new KeineKlasse(klassenName.getName());
     }
 
@@ -223,7 +233,8 @@ public class Verwalten {
                 return lehrer;
             }
         }
-        throw new KeinPerson("Ein Lehrer mit der Nummer: " + lehrerNummer.getLehrerNummer() + "konnte nicht gefunden werden.");
+        log.warn("Die Lehrer ist nicht existiert");
+        throw new KeinPerson(lehrerNummer.getLehrerNummer());
     }
 
 

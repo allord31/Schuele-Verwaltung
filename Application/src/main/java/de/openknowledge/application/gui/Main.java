@@ -28,22 +28,17 @@ import org.apache.log4j.Logger;
 
 
 public class Main {
-    static Logger log = Logger.getLogger(Main.class);
+    private static final Logger log = Logger.getLogger(Main.class);
     public static void main(String[] args) {
-//        log.trace("Trace Message!");
-//        log.debug("Debug Message!");
-//        log.info("Info Message!");
-//        log.warn("Warn Message!");
-//        log.error("Error Message!");
-//        log.fatal("Fatal Message!");
-
         //testdata
+        log.warn("Anwendung ist gestartet.");
         DataBank dataBank = new DataBank();
         if (System.getenv("TEST_DATA_AKTIVIERT").equals("aktiviert")) {
             BereitendeKlassen bereitendeKlassen = new BereitendeKlassen();
             BereitendeLehrer bereitendeLehrer = new BereitendeLehrer();
             BereitendeSchueler bereitendeSchueler = new BereitendeSchueler();
             dataBank = new DataBank(bereitendeKlassen, bereitendeLehrer, bereitendeSchueler);
+            log.info("Test Data wurde erstellt.");
         }
         //Create verwaltung
         Verwalten verwalten = new Verwalten(dataBank.getKlassenArray(), dataBank.getLehrerArray(), dataBank.getSchuelerArray());
@@ -58,7 +53,10 @@ public class Main {
                 case 3 -> kopfVonServices.neuSchuerlerOderLehrerEinfuegen();
                 case 4 -> kopfVonServices.entfernenLehrerOderSchuelerVonSchule();
                 case 5 -> kopfVonServices.setSprache();
-                case 6 -> System.exit(0);
+                case 6 -> {
+                    log.info("Der benutzer hat die Anwendung beenden.");
+                    System.exit(0);
+                }
             }
         }
 

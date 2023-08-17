@@ -17,6 +17,7 @@ package de.openknowledge.application.sekretearin;
 
 import de.openknowledge.application.einundausgabe.Ausgabe;
 import de.openknowledge.application.einundausgabe.Eingabe;
+import de.openknowledge.application.guiservices.KopfVonServices;
 import de.openknowledge.domain.verwaltung.Verwalten;
 import de.openknowledge.domain.verwaltung.attribute.Adresse;
 import de.openknowledge.domain.verwaltung.attribute.AdressenList;
@@ -34,8 +35,11 @@ import de.openknowledge.infrastruktur.exception.KeineKlasse;
 import de.openknowledge.infrastruktur.exception.PersonExist;
 import de.openknowledge.infrastruktur.exception.PersonIstInDerKlasse;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
-public class LehrerController {
 
+import org.apache.log4j.Logger;
+
+public class LehrerController {
+    private static final Logger log = Logger.getLogger(LehrerController.class.getName());
     private final Verwalten verwalten;
     /**
      * Konstruktor für den LehrerController.
@@ -53,6 +57,7 @@ public class LehrerController {
             MyBufferedReader.print(Ausgabe.lehrerDetails().formatted(lehrer.getLehrerNummerObje().getLehrerNummer(), lehrer.getVorname()
                 , lehrer.getNachname(), lehrer.getGeburtsdatum().toString(), lehrer.getAdresse().getAdresses(), lehrer.getTelefon()));
         }
+        log.trace("lehrer List gezeigt.");
     }
     /**
      * Zeigt die Details eines bestimmten Lehrers an.
@@ -77,6 +82,7 @@ public class LehrerController {
         Name klassenName = Eingabe.klassenName();
     try {
      verwalten.lehrerUmsetzen(klassenName,lehrerNummer);
+     log.info("Lehrer wurde umgesetzt.");
     } catch (KeinPerson e) {
         Ausgabe.lehrerNichtGefunden(lehrerNummer);
     } catch (KeineKlasse e) {
@@ -90,6 +96,7 @@ public class LehrerController {
         Lehrer neuLehrer = lehrerErstellen();
         try {
             verwalten.addNeuLehrer(neuLehrer);
+            log.info("Lehrer wurde eingefügt.");
         } catch (PersonExist e) {
             Ausgabe.lehrerIstInDerSchuele(neuLehrer);
         }
@@ -100,6 +107,7 @@ public class LehrerController {
      * @return Ein neu erstelltes Lehrer-Objekt.
      */
     private static Lehrer lehrerErstellen() {
+        log.info("Lehrer erstellen");
         LehrerNummer lehrerNummer= Eingabe.lehrerNummer();
         Name vorname = Eingabe.vorname();
         Name nachname = Eingabe.nachname();
@@ -112,6 +120,7 @@ public class LehrerController {
         Adresse adresse = new Adresse(adresszeileEins, adresszeileZwei, stadt, plz);
         AdressenList adressenList = new AdressenList(adresse);
         Lehrer neuLehrer = new Lehrer(vorname, nachname, geburtsdatum, telefon, adressenList, lehrerNummer);
+        log.info("Lehrer wurde erstellt.");
         return neuLehrer;
     }
     /**
@@ -121,6 +130,7 @@ public class LehrerController {
         LehrerNummer lehrerNummer = Eingabe.lehrerNummer();
         try {
             verwalten.removeLehrer(lehrerNummer);
+            log.info("Lehrer wurde Entfernt.");
         } catch (KeinPerson keinPerson) {
             Ausgabe.lehrerEntfernen(lehrerNummer);
         }

@@ -32,9 +32,11 @@ import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
 
 
 public class Eingabe {
+    private static Logger log = Logger.getLogger(Eingabe.class.getName());
     private static ResourceBundle resourceBundle = new Sprachen().getResourceBundle();
    private static Scanner input = new Scanner(System.in);
     public static void setResourceBundle(ResourceBundle setResourceBundle) {
@@ -50,7 +52,7 @@ public class Eingabe {
                 return auswahl(anfangReichweite, endeReichweite);
             }
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(resourceBundle.getString("UngueltigeEingabe"));
+           log.warn("Der Benutzer hat falsche Eingabe eingegeben.");
            return auswahl(anfangReichweite,endeReichweite);
         }
     }
@@ -60,6 +62,7 @@ public class Eingabe {
             return new Plz(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigePLZ"));
+            log.warn("Der Benutzer hat ungültige Post Leitzahl eingegeben.");
             return plz();
         }
     }
@@ -69,6 +72,7 @@ public class Eingabe {
             return new Geburtsdatum(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeGeburtsdatum"));
+            log.warn("Der Benutzer hat ungültige Geburtsdatum eingegeben.");
             return geburtsdatum();
         }
     }
@@ -78,6 +82,7 @@ public class Eingabe {
             return new AdresszeileEins(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeAdresszeileEins"));
+            log.warn("Der Benutzer hat ungültige AdresszeileEins eingegeben.");
             return adresszeileEins();
         }
     }
@@ -87,6 +92,7 @@ public class Eingabe {
             return new AdresszeileZwei(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeAdresszeileZwei"));
+            log.warn("Der Benutzer hat ungültige AdresszeileZwei eingegeben.");
             return adresszeileZwei();
         }
     }
@@ -96,6 +102,7 @@ public class Eingabe {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeVorname"));
+            log.warn("Der Benutzer hat ungültige Vorname eingegeben.");
             return vorname();
         }
     }
@@ -105,6 +112,7 @@ public class Eingabe {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeNachname"));
+            log.warn("Der Benutzer hat ungültige Nachname eingegeben.");
             return nachname();
         }
     }
@@ -114,6 +122,7 @@ public class Eingabe {
             return new Name(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeKlassenname"));
+            log.warn("Der Benutzer hat ungültige Klassenname eingegeben.");
             return klassenName();
         }
     }
@@ -123,7 +132,8 @@ public class Eingabe {
         try {
             return new Telefon(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
-            MyBufferedReader.print(eingabe.getMessage());
+            MyBufferedReader.print(resourceBundle.getString("UngueltigeTelefon"));
+            log.warn("Der Benutzer hat ungültige Telefonnummer eingegeben.");
             return telefon();
         }
 
@@ -134,6 +144,7 @@ public class Eingabe {
             return new Stadt(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeStadt"));
+            log.warn("Der Benutzer hat ungültige Stadt eingegeben.");
             return stadt();
         }
     }
@@ -143,6 +154,7 @@ public class Eingabe {
             return new LehrerNummer(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeLehrerNummer"));
+            log.warn("Der Benutzer hat ungültige Lehrernummer eingegeben.");
             return lehrerNummer();
         }
     }
@@ -152,6 +164,7 @@ public class Eingabe {
             return new SchuelerNummer(input.nextLine());
         } catch (UngueltigeEingabe eingabe) {
             MyBufferedReader.print(resourceBundle.getString("UngueltigeSchuelerNummer"));
+            log.warn("Der Benutzer hat ungültige Schülernummer eingegeben.");
             return schuelerNummer();
         }
     }

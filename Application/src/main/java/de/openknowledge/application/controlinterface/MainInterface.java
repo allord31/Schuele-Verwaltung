@@ -15,17 +15,19 @@ package de.openknowledge.application.controlinterface;
  * limitations under the License.
  */
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import de.openknowledge.application.guiservices.Sprachen;
 import de.openknowledge.infrastruktur.printing.MyBufferedReader;
 
+import org.apache.log4j.Logger;
+
 public class MainInterface {
     private static ResourceBundle resourceBundle = new Sprachen().getResourceBundle();
 
     public static void mainInterfaceZeigen() {
-        MyBufferedReader.print("\n" + resourceBundle.getString("hauptMenu"));
-    }
+        MyBufferedReader.print("\n" + resourceBundle.getString("hauptMenu"));    }
     public static void setResourceBundle(ResourceBundle setResourceBundle) {
         resourceBundle = setResourceBundle;
     }

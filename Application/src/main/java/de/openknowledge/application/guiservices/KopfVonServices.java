@@ -25,6 +25,8 @@ import de.openknowledge.domain.verwaltung.Verwalten;
 
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
+
 public class KopfVonServices {
     private Verwalten verwalten;
     private KlassenController klassenController;
